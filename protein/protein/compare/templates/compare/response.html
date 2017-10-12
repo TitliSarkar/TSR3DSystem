@@ -1,0 +1,28 @@
+{% extends 'compare/base.html' %}
+
+{% block bodyy %}
+
+<h1 align="center">Results of Comparison with {{ s1 }} :</h1>
+<h2>Similarity Values are shown below:</h2><br>
+
+    <table cellpadding="10" border="1">
+    <tr>
+        <th>Protein_ID</th>
+        <th>Similarity_Value</th>
+        <th>Class</th>
+        <th>Architecture</th>
+        <th>TopologyFold</th>
+        <th>HomologySuperfamily</th>
+    </tr>
+    {% for pro in i %}
+        <tr>
+        <td>{{ pro.ProtId }}</td>
+        <td>{{ pro.similarity }}</td>
+        <td>{{ pro.class}}</td>
+        <td>{{ pro.archi }}</td>
+        <td>{{ pro.topfold }}</td>
+        <td>{{ pro.homsup }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}
