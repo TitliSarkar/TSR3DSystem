@@ -1,0 +1,62 @@
+ {% load i18n %}{% load staticfiles %}
+<!-- NAVBAR
+================================================== -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+        <i class="icon-bar"></i>
+        <i class="icon-bar"></i>
+      </button>
+      <a class="navbar-brand" href="/"><b>TSR PDB</b></a>
+    </div>
+    <!--navbar-header-->
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" role="navigation" id="navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+          {% trans "Compare" %}
+          <span class="caret"></span>
+        </a>
+
+          <ul class="dropdown-menu">
+            <li class="{% if request.resolver_match.url_name == 'display' %}active{% endif %}">
+              <a href="{% url 'display' %}">
+                <i class='fa fa-balance-scale'></i>
+                {% trans "Protien ID" %}
+              </a>
+            </li>
+            <li class="{% if request.resolver_match.url_name == 'display_1' %}active{% endif %}">
+              <a href="{% url 'display_1' %}">
+                <i class='fa fa-balance-scale'></i> {% trans "Heirarchy Level" %}
+              </a>
+            </li>
+          </ul> <!-- dropdown-menu -->
+        </li> <!-- dropdown -->
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            {% trans "Search" %}
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li class="{% if request.resolver_match.url_name == 'display_2' %}active{% endif %}">
+              <a href="{% url 'display_2' %}">
+                <i class='fa fa-search'></i> {% trans "Protein ID and Amino Acid" %}
+              </a>
+            </li>
+            <li class="{% if request.resolver_match.url_name == 'display_3' %}active{% endif %}">
+              <a href="{% url 'display_3' %}">
+                <i class='fa fa-search'></i> {% trans "Protein ID" %}
+              </a>
+            </li>
+          </ul> <!-- dropdown-menu -->
+        </li> <!-- dropdown -->
+      </ul> <!-- navbar-nav navbar-right -->
+    </div> <!--collapse-->
+  </div> <!--container-->
+</nav> <!-- navbar navbar-inverse -->
+<!-- END NAVBAR
+=========================== -->

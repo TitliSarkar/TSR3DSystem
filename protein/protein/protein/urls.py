@@ -15,8 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from compare import urls as compare_urls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^compare/', include('compare.urls')),
+    url(r'^compare/', include(compare_urls), name='compare'),
 ]

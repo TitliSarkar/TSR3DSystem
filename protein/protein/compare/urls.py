@@ -1,22 +1,12 @@
 from django.conf.urls import url
-from . import views
+from django.views.generic import TemplateView
 
-app_name = 'compare'
+from compare import views
 
 urlpatterns = [
-
-    #/compare/
-    url(r'^$', views.index, name='index'),
-
-    #/compare/display/
+    url(r'^$', TemplateView.as_view(template_name='general/compare.html')),
     url(r'^display/$', views.display, name='display'),
-
-    #/compare/display1/
     url(r'^display1/$', views.display_1, name='display_1'),
-
-    #/compare/display2/
     url(r'^display2/$', views.display_2, name='display_2'),
-
-    #/compare/display3/
     url(r'^display3/$', views.display_3, name='display_3'),
 ]

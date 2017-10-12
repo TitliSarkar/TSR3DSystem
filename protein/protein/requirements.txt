@@ -1,0 +1,8 @@
+compare==0.2b0
+Django==1.11.6
+numpy==1.13.3
+pandas==0.20.3
+python-dateutil==2.6.1
+python-memcached==1.58
+pytz==2017.2
+six==1.11.0

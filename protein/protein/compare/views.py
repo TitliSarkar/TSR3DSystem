@@ -12,20 +12,7 @@ import pandas as pd
 from django.db.models import Min
 from django.db.models.aggregates import Count
 
-def databaseConnection(dbname):
-    # Open database connection
-    db = MySQLdb.connect("localhost", "root", "123456", dbname)
-    # prepare a cursor object using cursor() method
-    cursor = db.cursor()
-    # execute SQL query using execute() method.
-    cursor.execute("SELECT VERSION()")
-    # Fetch a single row using fetchone() method.
-    data = cursor.fetchone()
-    print("Database version : %s " % data)
-#central control of the system
-def index(request):
-    #return HttpResponse("Thanks !!")
-    return render(request, 'compare/form1.html') ##### compare/template/compare/form1.html   #compare/template already mentioned in settings.py, dont need to mention tht part
+
 def display(request):
     if request.method=="POST":
 	if "Choice_1" in request.POST:
@@ -36,6 +23,7 @@ def display(request):
 	    return render(request, 'compare/choice2.html')
 	elif "Choice_3" in request.POST:
 		return render(request, 'compare/choice3.html')
+
 
 def display_1(request):
     if request.method=="POST":
@@ -66,6 +54,7 @@ def display_1(request):
     #return HttpResponse("Thanks for your choices!! Your Choices are:<br>PDB from list1 : %s<br>PDB from list2 : %s"%(s1,s2))
     return render(request, 'compare/response.html', context) #using dic as vehicle to show reaults
 
+
 def display_2(request):
     if request.method == "POST":
 	s1 = request.POST["list1"]
@@ -79,7 +68,7 @@ def display_2(request):
 		lst = [(2,30,30,40),(2,30,200,10),(2,30,200,20),(2,30,800,10),(2,30,1010,10),(2,130,10,10)]
 	    elif cl=='3':
 		lst = [(3,10,50,40),(3,20,200,10),(3,20,200,20),(3,30,30,40),(3,30,200,10),(3,30,200,20),(3,30,800,10),(3,30,1010,10),(3,90,1200,10),(3,90,810,10)]
-	
+
 	tf = request.POST["topfolds"]
         if tf=='0':
 	    if cl=='1' and ar=='25':
@@ -98,7 +87,7 @@ def display_2(request):
 		    lst = [(3,30,30,40),(3,30,200,10),(3,30,200,20),(3,30,800,10),(3,30,1010,10)]
 		elif ar=='90':
 		    lst = [(3,90,1200,10),(3,90,810,10)]
-	
+
 
 	hs = request.POST["homologies"]
 	hs = str(hs)

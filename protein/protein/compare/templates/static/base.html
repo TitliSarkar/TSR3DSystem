@@ -1,0 +1,26 @@
+{% extends "compare/static/atom.html" %}
+{% load staticfiles %}
+<!-- HEADER -->
+{% block header %}
+<div id="masthead">
+    <div class="container">
+        <h2 class="wow fadeInDown" data-wow-delay="0.3s">
+            {% block header_title %}
+            {% endblock header_title %}
+        </h2>
+    </div><!-- container -->
+</div><!--masthead-->
+{% endblock header %}
+<!-- END OF HEADER -->
+{% block style_extra %}
+{% endblock style_extra %}
+{% block script %}
+{% block script_extra %}
+{% endblock script_extra %}
+{% endblock script %}
+{% block content %}
+<div id="content-col" class="container">
+    {% block body %} {% endblock %}
+</div><!-- container-->
+<div class="push"></div>
+{% endblock content %}
