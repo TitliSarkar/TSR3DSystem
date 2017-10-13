@@ -29,19 +29,19 @@
     <h1 class="centered wow fadeIn" data-wow-delay="1.0s">TSR Protein Database</h1>
     <div class="row">
       <div class="col-md-4 wow fadeInLeft" data-wow-delay="0.3s">
-        <a href={% url 'display' %} data-scroll target="_blank" class="btn btn-primary btn-block btn-lg" role="button">
+        <a href={% url 'compare_by_pid' %} data-scroll target="_blank" class="btn btn-primary btn-block btn-lg" role="button">
           <i class="fa fa-balance-scale"></i> Compare Protein ID
         </a>
       </div>
       <!-- col-md-4 -->
       <div class="col-md-4 wow fadeInUp" data-wow-delay="0.3s">
-        <a href={% url 'display_2' %} data-scroll target="_blank" class="btn btn-primary btn-block btn-lg" role="button">
+        <a href={% url 'compare_by_hl' %} data-scroll target="_blank" class="btn btn-primary btn-block btn-lg" role="button">
           <i class='fa fa-balance-scale'></i> Compare Hierarchy Level
         </a>
       </div>
       <!-- col-md-4 -->
       <div class="col-md-4 wow fadeInRight" data-wow-delay="0.3s">
-        <a href={% url 'display_3' %} data-scroll target="_blank" class="btn btn-primary btn-block btn-lg" role="button">
+        <a href={% url 'search_by_pid' %} data-scroll target="_blank" class="btn btn-primary btn-block btn-lg" role="button">
           <i class='fa fa-search'></i> Search by Proteins ID
         </a>
       </div>

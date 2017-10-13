@@ -1,28 +1,18 @@
+from django.db.models import Min
+from django.db.models.aggregates import Count
 from django.shortcuts import render
 from django.db import connection
 from django.http import HttpResponse
-from .models import SIMILARITY_INFORMATION
-from .models import PROTEIN_HIERARCHY
-from .models import CLASS_DESCRIPTION
-from .models import ARCHITECTURE_DESCRIPTION
-from .models import TOPOLOGYFOLD_DESCRIPTION
-from .models import HOMOLOGYSUPERFAMILY_DESCRIPTION
-from .models import ALL_PROTEINS
+
 import pandas as pd
-from django.db.models import Min
-from django.db.models.aggregates import Count
 
-
-def display(request):
-    if request.method=="POST":
-	if "Choice_1" in request.POST:
-	    #return HttpResponse("Choice 1 selected")
-	    return render(request, 'compare/choice1.html') ###### request from 'form1.html'
-	elif "Choice_2" in request.POST:
-	    #return HttpResponse("Choice 2 selected")
-	    return render(request, 'compare/choice2.html')
-	elif "Choice_3" in request.POST:
-		return render(request, 'compare/choice3.html')
+from compare.models import SIMILARITY_INFORMATION
+from compare.models import PROTEIN_HIERARCHY
+from compare.models import CLASS_DESCRIPTION
+from compare.models import ARCHITECTURE_DESCRIPTION
+from compare.models import TOPOLOGYFOLD_DESCRIPTION
+from compare.models import HOMOLOGYSUPERFAMILY_DESCRIPTION
+from compare.models import ALL_PROTEINS
 
 
 def display_1(request):

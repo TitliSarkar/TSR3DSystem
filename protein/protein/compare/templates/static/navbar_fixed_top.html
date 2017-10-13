@@ -22,14 +22,14 @@
         </a>
 
           <ul class="dropdown-menu">
-            <li class="{% if request.resolver_match.url_name == 'display' %}active{% endif %}">
-              <a href="{% url 'display' %}">
+            <li class="{% if request.resolver_match.url_name == 'compare_by_pid' %}active{% endif %}">
+              <a href="{% url 'compare_by_pid' %}">
                 <i class='fa fa-balance-scale'></i>
                 {% trans "Protien ID" %}
               </a>
             </li>
-            <li class="{% if request.resolver_match.url_name == 'display_1' %}active{% endif %}">
-              <a href="{% url 'display_1' %}">
+            <li class="{% if request.resolver_match.url_name == 'compare_by_hl' %}active{% endif %}">
+              <a href="{% url 'compare_by_hl' %}">
                 <i class='fa fa-balance-scale'></i> {% trans "Heirarchy Level" %}
               </a>
             </li>
@@ -44,13 +44,8 @@
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li class="{% if request.resolver_match.url_name == 'display_2' %}active{% endif %}">
-              <a href="{% url 'display_2' %}">
-                <i class='fa fa-search'></i> {% trans "Protein ID and Amino Acid" %}
-              </a>
-            </li>
-            <li class="{% if request.resolver_match.url_name == 'display_3' %}active{% endif %}">
-              <a href="{% url 'display_3' %}">
+            <li class="{% if request.resolver_match.url_name == 'search_by_pid' %}active{% endif %}">
+              <a href="{% url 'search_by_pid' %}">
                 <i class='fa fa-search'></i> {% trans "Protein ID" %}
               </a>
             </li>

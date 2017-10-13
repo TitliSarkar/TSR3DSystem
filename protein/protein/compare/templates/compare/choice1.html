@@ -1,6 +1,12 @@
-{% extends 'compare/base.html' %}
+{% extends "static/base.html" %}
+{% block title %}Compare by Protein ID{% endblock title %}
+{% block header_title %}
+<h2 class="wow fadeInDown">
+    <i class="fa fa-balance-scale"></i> Compare by Protein ID
+</h2>
+{% endblock header_title %}
 
-{% block head %}
+{% block script %}
 <script type="text/javascript">
 function list1Changed(choice)
     {
@@ -18,13 +24,13 @@ function list2Changed()
     }
 
 </script>
-{% endblock %}
+{% endblock script %}
 
-{% block bodyy %}
+{% block body %}
 <h1 align="center">TSR Protein Database System</h1>
 	<form name="displayform" method="POST" action="/compare/display1/">{% csrf_token %}
   <h2 align="center">Do You Want to do comparison by Protein IDs ?</h2>
-	
+
 	    <label><b>Select PDB ID you want to compare:</b></label><select id="list1" name="list1" onclick='list1Changed(this.value);' style="margin:20px;min-width: 200px">
           <option  disabled selected>Select</option>
   		    <option value="1bo1" >1bo1</option>
@@ -63,7 +69,7 @@ function list2Changed()
       <br>
         <p id="demo"></p>
 
-  <br>   
+  <br>
 	    <label><b>Select PDB IDs you want to compare : </b></label><select id="list2" name="list2" size=5 style="min-width: 200px" multiple="multiple" onclick='list2Changed(this.value);'>
             <option  disabled selected>Select</option>
   		    <option value="1bo1" >1bo1</option>
@@ -106,4 +112,4 @@ function list2Changed()
     </div>
 	</form>
 
-{% endblock %}
+{% endblock body %}
