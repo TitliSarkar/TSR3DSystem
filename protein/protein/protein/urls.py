@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.views.generic import TemplateView
 from compare import urls as compare_urls
 
 urlpatterns = [
+    url(r'^$', TemplateView.as_view(template_name='general/compare.html')),
     url(r'^admin/', admin.site.urls),
     url(r'^compare/', include(compare_urls), name='compare'),
 ]

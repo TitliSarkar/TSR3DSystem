@@ -1,4 +1,4 @@
-{% extends 'compare/base.html' %}
+{% extends '../static/base.html' %}
 
 {% block head %}
 <script type="text/javascript">
@@ -170,7 +170,7 @@ function list1Changed(choice)
         case "1200":
             homologyArray=homologies1200
             break;
-        default:         
+        default:
       }
 
       for (i=0; i<homologyArray.length; i++)
@@ -260,7 +260,7 @@ function list1Changed(choice)
   <select name= 'architectures' id='architectures' onchange='architectureChanged(this.value);'>
     <option value='0'>Select Architecture</option>
   </select>
-  &nbsp;&nbsp; 
+  &nbsp;&nbsp;
   <select name='topfolds' id='topfolds' onchange='topfoldChanged(this.value);'>
     <option value='0'>Select Topfold</option>
   </select>
@@ -269,7 +269,7 @@ function list1Changed(choice)
     <option value='0'>Select HomologySuperfamily</option>
   </select>
 
-    
+
     <div style="text-align:center;">
       <input type="submit" value="RUN THE COMPARISON" style="margin:30px auto; display:block;" />
     </div>

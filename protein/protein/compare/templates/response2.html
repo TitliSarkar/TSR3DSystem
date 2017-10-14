@@ -1,0 +1,24 @@
+{% extends 'static/base.html' %}
+{% load i18n %} {% load staticfiles %}
+{% block title %}Common Keys among the Proteins{% endblock title %}
+
+{% block body %}
+<h1 align="center">Common keys among the proteins {{ s }} are:</h1>
+
+<div clas="table-responsive">
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Sequence IDs</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key in i %}
+            <tr>
+                <td>{{ key }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

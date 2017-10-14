@@ -3,12 +3,13 @@ import MySQLdb
 import numpy as np
 import pandas as pd
 import csv
+import os
 import glob
 
 #path = 'E:\\Codes\\Python_Code\\Database Part\\'
-path = '//home//linc//txs7980//Desktop//Database Part//'
+path = '/home/s2e/Studies/IRS/Project/Database/'
 # Open database connection
-db = MySQLdb.connect("localhost", "root", "123456", "ProteinDB")
+db = MySQLdb.connect("localhost", "root", "12345678", "ProteinDB")
 
 # prepare a cursor object using cursor() method
 cursor = db.cursor()
@@ -134,7 +135,7 @@ def insertALL_PROTEINS():   ## saving everything in a csv file and reading from 
             #print (Protein_ID, Protein_Key, Key_coourence_no, aacd0, position0, aacd1, position1, aacd2, position2, classT1, Theta, classL1, maxDist, x0, y0, z0, x1, y1, z1, x2, y2, z2)
             try:
                 cursor.execute(
-                    "INSERT INTO comand(Protein_ID, Protein_Key, Key_coourence_no, aacd0, position0, aacd1, position1, aacd2, position2, classT1, Theta, classL1, maxDist, x0, y0, z0, x1, y1, z1, x2, y2, z2) "
+                    "INSERT INTO compare_all_proteins(Protein_ID, Protein_Key, Key_coourence_no, aacd0, position0, aacd1, position1, aacd2, position2, classT1, Theta, classL1, maxDist, x0, y0, z0, x1, y1, z1, x2, y2, z2) "
                     "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
                     ([Protein_ID], [Protein_Key], [Key_coourence_no], [aacd0], [position0], [aacd1], [position1], [aacd2], [position2], [classT1], [Theta], [classL1], [maxDist], [x0], [y0], [z0], [x1], [y1], [z1], [x2], [y2], [z2])
                 )
@@ -175,15 +176,14 @@ def insertSIMILARITY_INFORMATION():
             except MySQLdb.Error, e:
                 print(e)
 
-#Function Calling
-#insertCLASS_DESCRIPTION()
-#insertARCHITECTURE_DESCRIPTION()
-#insertTOPOLOGYFOLD_DESCRIPTION()
-#insertHOMOLOGYSUPERFAMILY_DESCRIPTION()
-#insertPROTEIN_HIERARCHY()
-insertALL_PROTEINS()            ## !!!!!!!!!!!!
-#insertPOSITION_INFORMATION() ######
-#insertSIMILARITY_INFORMATION()
+insertCLASS_DESCRIPTION()
+insertARCHITECTURE_DESCRIPTION()
+insertTOPOLOGYFOLD_DESCRIPTION()
+insertHOMOLOGYSUPERFAMILY_DESCRIPTION()
+insertPROTEIN_HIERARCHY()
+#insertALL_PROTEINS()            ## !!!!!!!!!!!!
+insertPOSITION_INFORMATION() ######
+insertSIMILARITY_INFORMATION()
 
 db.commit()
 db.close()

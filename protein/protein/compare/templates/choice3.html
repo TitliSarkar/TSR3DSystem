@@ -1,6 +1,7 @@
-{% extends 'compare/base.html' %}
+{% extends 'static/base.html' %}
 
 {% block head %}
+{% block script %}
 <script type="text/javascript">
 
 function list3Changed()
@@ -15,13 +16,14 @@ function list3Changed()
     }
 
 </script>
+{% endblock script %}
 {% endblock %}
 
-{% block bodyy %}
+{% block body %}
 <h1 align="center">TSR Protein Database System</h1>
-	<form name="displayform" method="POST" action="/compare/display3/">{% csrf_token %}
+<form name="displayform" method="POST" action="{% url 'search_by_pid_result' %}">{% csrf_token %}
   <h2 align="center">Do You Want to search all keys by Protein IDs?</h2>
-  <br>   
+  <br>
 	    <label><b>Select PDB IDs you want to search for common keys: </b></label><select id="list3" name="list3" size=5 style="min-width: 200px" multiple="multiple" onclick='list3Changed(this.value);'>
             <option  disabled selected>Select</option>
   		    <option value="1bo1" >1bo1</option>
