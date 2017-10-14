@@ -2,14 +2,14 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.downCount/1.0.0/jquery.downCount.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script>
 <script src="{% static 'js/jquery.singlePageNav.min.js' %}"></script>
+<script src="{% static 'js/contact_us_validator.js' %}"></script>
 <script src="{% static 'js/custom.js' %}"></script>
 {% endblock script %} {% block content %} {% block body %}
 
 <!-- start preloader -->
 <div class="preloader" id="preloader">
   <img src="{% static 'images/Preloader.gif' %}" alt="Preloader" />
-</div>
-<!-- preloader -->
+</div> <!-- preloader -->
 
 <div class="jumbotron">
   <div class="container">
@@ -17,40 +17,31 @@
       <div class="col-md-4"></div>
       <div class="col-md-4">
         <div class="centered">
-          <img src="{% static 'images/logo.png' %}" class="img-fluid centered wow fadeInDown " , style="width:75%" data-wow-delay="0.3s">
-        </div>
-        <!--centered-->
-      </div>
-      <!--col-md-4-->
+          <img src="{% static 'images/logo.png' %}" class="img-fluid centered" , style="width:75%">
+        </div> <!--centered-->
+      </div> <!--col-md-4-->
       <div class="col-md-4"></div>
-    </div>
-    <!-- row -->
+    </div> <!-- row -->
 
-    <h1 class="centered wow fadeIn" data-wow-delay="1.0s">TSR Protein Database</h1>
+    <h1 class="centered">TSR Protein Database</h1>
     <div class="row">
-      <div class="col-md-4 wow fadeInLeft" data-wow-delay="0.3s">
+      <div class="col-md-4">
         <a href={% url 'compare_by_pid' %} data-scroll target="_blank" class="btn btn-primary btn-block btn-lg" role="button">
-          <i class="fa fa-balance-scale"></i> Compare Protein ID
+          <i class="fa fa-balance-scale"></i> Protein ID
         </a>
-      </div>
-      <!-- col-md-4 -->
-      <div class="col-md-4 wow fadeInUp" data-wow-delay="0.3s">
+      </div> <!-- col-md-4 -->
+      <div class="col-md-4">
         <a href={% url 'compare_by_hl' %} data-scroll target="_blank" class="btn btn-primary btn-block btn-lg" role="button">
-          <i class='fa fa-balance-scale'></i> Compare Hierarchy Level
+          <i class='fa fa-balance-scale'></i> Hierarchy Level
         </a>
-      </div>
-      <!-- col-md-4 -->
-      <div class="col-md-4 wow fadeInRight" data-wow-delay="0.3s">
+      </div> <!-- col-md-4 -->
+      <div class="col-md-4">
         <a href={% url 'search_by_pid' %} data-scroll target="_blank" class="btn btn-primary btn-block btn-lg" role="button">
-          <i class='fa fa-search'></i> Search by Proteins ID
+          <i class='fa fa-search'></i> Proteins ID
         </a>
-      </div>
-      <!-- col-md-4 -->
-    </div>
-    <!-- row -->
-  </div>
-  <!-- container -->
-</div>
-<!-- jumbotron -->
+      </div> <!-- col-md-4 -->
+    </div> <!-- row -->
+  </div> <!-- container -->
+</div> <!-- jumbotron -->
 <!-- end home -->
 {% endblock body %} {% endblock content %}

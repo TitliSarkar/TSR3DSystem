@@ -134,7 +134,7 @@ def insertALL_PROTEINS():   ## saving everything in a csv file and reading from 
             #print (Protein_ID, Protein_Key, Key_coourence_no, aacd0, position0, aacd1, position1, aacd2, position2, classT1, Theta, classL1, maxDist, x0, y0, z0, x1, y1, z1, x2, y2, z2)
             try:
                 cursor.execute(
-                    "INSERT INTO compare_all_proteinstest(Protein_ID, Protein_Key, Key_coourence_no, aacd0, position0, aacd1, position1, aacd2, position2, classT1, Theta, classL1, maxDist, x0, y0, z0, x1, y1, z1, x2, y2, z2) "
+                    "INSERT INTO comand(Protein_ID, Protein_Key, Key_coourence_no, aacd0, position0, aacd1, position1, aacd2, position2, classT1, Theta, classL1, maxDist, x0, y0, z0, x1, y1, z1, x2, y2, z2) "
                     "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
                     ([Protein_ID], [Protein_Key], [Key_coourence_no], [aacd0], [position0], [aacd1], [position1], [aacd2], [position2], [classT1], [Theta], [classL1], [maxDist], [x0], [y0], [z0], [x1], [y1], [z1], [x2], [y2], [z2])
                 )
