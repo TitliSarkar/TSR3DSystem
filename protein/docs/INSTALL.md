@@ -5,7 +5,7 @@ Its super easy to set up our development environment
 Install `python-pip`, `python-dev` and `virtualenvwrapper`
 ```bash
 sudo apt-get install git binutils libpq-dev python-dev python-setuptools
-sudo apt-get install memcached python-pip sqlite3
+sudo apt-get install memcached python-pip sqlite3 libmysqlclient-dev
 sudo pip install virtualenvwrapper
 ```
 

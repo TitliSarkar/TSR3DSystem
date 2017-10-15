@@ -56,11 +56,11 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ProteinDB',
         'USER': 'root',
-        'PASSWORD': '12345678',
+        'PASSWORD': 'ENTER_MYSQL_ROOT_PASSWORD_HERE',
         'HOST': 'localhost',
         'PORT': '',
-        'OPTIONS' : {
-            'sql_mode' : 'traditional',
+        'OPTIONS': {
+            'sql_mode': 'traditional',
         }
     }
 }
