@@ -2,7 +2,6 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.downCount/1.0.0/jquery.downCount.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script>
 <script src="{% static 'js/jquery.singlePageNav.min.js' %}"></script>
-<script src="{% static 'js/contact_us_validator.js' %}"></script>
 <script src="{% static 'js/custom.js' %}"></script>
 {% endblock script %} {% block content %} {% block body %}
 
@@ -16,31 +15,37 @@
     <div class="row">
       <div class="col-md-4"></div>
       <div class="col-md-4">
-        <div class="centered">
-          <img src="{% static 'images/logo.png' %}" class="img-fluid centered" , style="width:75%">
-        </div> <!--centered-->
+        <div class="wow zoomIn" data-wow-duration="1s" data-wow-offset="100">
+            <div class="wow tada" data-wow-delay="1s" data-wow-duration="1s">
+                <div class="wow rubberBand" data-wow-delay="2000ms" data-wow-duration="1s">
+                    <div class="centered wow pulse" data-wow-delay="300ms" data-wow-iteration="infinite" data-wow-duration="2s">
+                        <img src="{% static 'images/logo.png' %}" class="img-fluid centered" , style="width:75%">
+                    </div> <!--centered-->
+                </div> <!--rubberBand-->
+            </div> <!--wow tada-->
+        </div> <!--wow zoomIn-->
       </div> <!--col-md-4-->
       <div class="col-md-4"></div>
     </div> <!-- row -->
 
-    <h1 class="centered">TSR Protein Database</h1>
+    <h1 class="centered wow pulse">TSR Protein Database</h1>
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-3 wow fadeInLeft" data-wow-delay="0.3s">
         <a href={% url 'compare_by_pid_home' %} data-scroll target="_blank" class="btn btn-primary btn-block" role="button">
           <i class="fa fa-balance-scale"></i> Protein ID
         </a>
       </div> <!-- col-md-3 -->
-      <div class="col-md-3">
+      <div class="col-md-3 wow bounceInDown" data-wow-delay="0.5s">
         <a href={% url 'compare_by_hl_home' %} data-scroll target="_blank" class="btn btn-primary btn-block" role="button">
           <i class='fa fa-balance-scale'></i> Hierarchy Level
         </a>
       </div> <!-- col-md-3 -->
-      <div class="col-md-3">
+      <div class="col-md-3 wow bounceInUp" data-wow-delay="0.5s">
         <a href={% url 'search_by_pid_home' %} data-scroll target="_blank" class="btn btn-primary btn-block" role="button">
           <i class='fa fa-search'></i> Proteins ID
         </a>
       </div> <!-- col-md-3 -->
-      <div class="col-md-3">
+      <div class="col-md-3 wow fadeInRight" data-wow-delay="0.3s">
         <a href={% url 'search_by_pid_seq_home' %} data-scroll target="_blank" class="btn btn-primary btn-block" role="button">
           <i class='fa fa-search'></i> Protein ID and Sequence
         </a>
