@@ -23,39 +23,30 @@ from compare.models import POSITION_INFORMATION
 
 def display_1(request):
     context = {}
-
     if request.method == "POST":
         s1 = request.POST["list1"]
         s2 = request.POST.getlist("list2[]")
-        print s1, s2, str(s2[0])
         context['s1'] = s1
         row_val = []
         for i in s2:
-	    try:
-                res = SIMILARITY_INFORMATION.objects.get(Protein_ID1_id=str(s1), Protein_ID2_id=str(i))
-                sim = res.Similarity_Value
-                res1 = PROTEIN_HIERARCHY.objects.get(Protein_ID=str(i))
-                # details = [res1.Class_id + res1.Architecture_id + res1.TopologyFold_id + res1.HomologySuperfamily_id]
-                row_val.append({'ProtId':str(i),
-                                'similarity':str(sim),
-                                'class':str(res1.Class_id),
-                                'archi':str(res1.Architecture_id),
-                                'topfold':str(res1.TopologyFold_id),
-                                'homsup':str(res1.HomologySuperfamily_id)})
-            except SIMILARITY_INFORMATION.DoesNotExist,PROTEIN_HIERARCHY.DoesNotExist:
-                print "-----No Match Found-----"
-            except SIMILARITY_INFORMATION.MultipleObjectsReturned, PROTEIN_HIERARCHY.MultipleObjectsReturned:
-                print "-----MultipleMatchesFound-----"
+            res = SIMILARITY_INFORMATION.objects.get(Protein_ID1_id=str(s1), Protein_ID2_id=str(i))
+            sim = res.Similarity_Value
+            res1 = PROTEIN_HIERARCHY.objects.get(Protein_ID=str(i))
+            row_val.append({'ProtId': str(i),
+                            'similarity': str(sim),
+                            'class': str(res1.Class_id),
+                            'archi': str(res1.Architecture_id),
+                            'topfold': str(res1.TopologyFold_id),
+                            'homsup': str(res1.HomologySuperfamily_id)})
 
         context['i'] = row_val
-        # return HttpResponse("Thanks for your choices!! Your Choices are:<br>PDB from list1 : %s<br>PDB from list2 : %s"%(s1,s2))
-    return render(request, 'response.html', context) #using dic as vehicle to show reaults
+    return render(request, 'response.html', context)
 
 
 def display_2(request):
     if request.method == "POST":
-	s1 = request.POST["list1"]
-	cl = request.POST["classes"]
+        s1 = request.POST["list1"]
+        cl = request.POST["classes"]
         ar = request.POST["architectures"]
         lst = []
         if ar == '0':
@@ -155,7 +146,9 @@ def display_2(request):
         context['i'] = []
         for i in s2:
             try:
-                res = SIMILARITY_INFORMATION.objects.get(Protein_ID1_id=str(s1), Protein_ID2_id=str(i))
+                res = SIMILARITY_INFORMATION.objects.get(
+                    Protein_ID1_id=str(s1),
+                    Protein_ID2_id=str(i))
                 sim = res.Similarity_Value
                 res1 = PROTEIN_HIERARCHY.objects.get(Protein_ID=str(i))
                 context['i'].append({'ProtId':str(i),
@@ -172,18 +165,20 @@ def display_2(request):
     return render(request, 'response.html', context)  # using dic as vehicle to show reaults
 
 
-# QUERT TYPE 2 ------------------>
-# Input: a set of protein ids , Output: Commom keys, by clicking on each keys, show list of all protein_ids having it and other details too
-# use of Group by and having clause -  complex queries in Django
 def display_3(request):
+    """
+    Input: A set of protein ids
+    Output: Commom keys, by clicking on each keys, show list of all protein_ids
+    having it and other details too
+    """
     context = {}
     s = request.POST.getlist("list3")
     qs = ALL_PROTEINS.objects.filter(Protein_ID_id__in=s) \
-            .distinct() \
-            .values('Protein_Key')\
-            .annotate(key_count=Count('Protein_Key')) \
-            .filter(key_count__gte=len(s)) \
-            .order_by('Protein_Key')
+        .distinct()\
+        .values('Protein_Key')\
+        .annotate(key_count=Count('Protein_Key')) \
+        .filter(key_count__gte=len(s)) \
+        .order_by('Protein_Key')
     db_rows = []
     for dict in qs:
         db_rows.append(dict.get('Protein_Key'))
@@ -191,18 +186,19 @@ def display_3(request):
     qs_desc_list = []
     for key in db_rows:
         for prot in s:
-            qs_desc_list.append(ALL_PROTEINS.objects.filter(Q(Protein_Key=str(key)) & \
-                Q(Protein_ID_id=str(prot))).order_by('Protein_ID_id', 'Key_coourence_no'))
+            qs_desc_list.append(ALL_PROTEINS.objects.filter(
+                Q(Protein_Key=str(key)) &
+                Q(Protein_ID_id=str(prot)))
+                .order_by('Protein_ID_id', 'Key_coourence_no'))
     context['j'] = qs_desc_list
-    return render(request, 'response1.html', context) #using dic as vehicle to show reaults
+    return render(request, 'response1.html', context)
 
 
 def display_4(request):
     context = {}
     pid = request.POST["list4"]
-    seq_id_queryset = POSITION_INFORMATION.objects.filter(Protein_ID_id=str(pid)).values('Seq_ID')
+    seq_id_queryset = POSITION_INFORMATION.objects.filter(
+        Protein_ID_id=str(pid)).values('Seq_ID')
     context['i'] = seq_id_queryset
-
     print seq_id_queryset
-
-    return render(request, 'response2.html', context) #using dic as vehicle to show reaults
+    return render(request, 'response2.html', context)
