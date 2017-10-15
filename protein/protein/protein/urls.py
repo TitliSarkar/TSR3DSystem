@@ -17,9 +17,11 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.views.generic import TemplateView
 from compare import urls as compare_urls
+from search import urls as search_urls
 
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='general/home.html')),
     url(r'^admin/', admin.site.urls),
     url(r'^compare/', include(compare_urls), name='compare'),
+    url(r'^search/', include(search_urls), name='search'),
 ]
