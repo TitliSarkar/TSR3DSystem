@@ -22,18 +22,23 @@ def display_3(request):
         .annotate(key_count=Count('Protein_Key')) \
         .filter(key_count__gte=len(s)) \
         .order_by('Protein_Key')
+
     db_rows = []
     for dict in qs:
         db_rows.append(dict.get('Protein_Key'))
     context['i'] = db_rows
-    qs_desc_list = []
+
+    keys_dict = {}
     for key in db_rows:
+        qs_desc_list = []
         for prot in s:
             qs_desc_list.append(ALL_PROTEINS.objects.filter(
                 Q(Protein_Key=str(key)) &
                 Q(Protein_ID_id=str(prot)))
                 .order_by('Protein_ID_id', 'Key_coourence_no'))
-    context['j'] = qs_desc_list
+        keys_dict[str(key)] = qs_desc_list
+
+    context['j'] = keys_dict
     return render(request, 'response1.html', context)
 
 

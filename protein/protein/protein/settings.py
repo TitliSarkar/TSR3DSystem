@@ -26,7 +26,10 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
 ]
 
-PROTEIN_APPS = ['compare']
+PROTEIN_APPS = [
+    'compare',
+    'search'
+]
 
 INSTALLED_APPS = DJANGO_APPS + PROTEIN_APPS
 
@@ -72,6 +75,5 @@ MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (MEDIA_ROOT,)
-
 
 from local_settings import *
