@@ -1,22 +1,22 @@
 {% extends 'static/base.html' %}
-{% block title %}Search by Protein ID and Sequence{% endblock title %}
+{% block title %}Select the Seq{% endblock title %}
 
 {% block header_title %}
 <h2 class="wow fadeInDown">
-    <i class="fa fa-search"></i> Search by Protein ID and Seq
+    <i class="fa fa-search"></i> Select the Sequences
 </h2>
 {% endblock header_title %}
 
 {% block script %}
 <script type="text/javascript">
 
-function list4Changed()
+function list4_1Changed()
     {
       var str="",i;
-      for (i=0;i<displayform.list4.options.length;i++) {
-          if (displayform.list4.options[i].selected) {
+      for (i=0;i<displayform.list4_1.options.length;i++) {
+          if (displayform.list4_1.options[i].selected) {
               str = str + '<span class="badge badge1">' 
-                  + displayform.list4.options[i].value + '</span> ';
+                  + displayform.list4_1.options[i].value + '</span> ';
           }
       }
         document.getElementById("demo4").innerHTML = 'Selected choice from list: ' + str ;
@@ -30,7 +30,7 @@ function list4Changed()
     <h2 align="center">Do You Want to search by Protein IDs and Sequence numbers?</h2>
     <br>
 	<label><b>Select PDB IDs you want to search for common keys: </b></label>
-    <select id="list4" name="list4" size=5 style="min-width: 200px"  onclick='list4Changed(this.value);'>
+    <select id="list4_1" name="list4_1" size=5 style="min-width: 200px"  onclick='list4_1Changed(this.value);'>
         <option  disabled selected>Select</option>
             {% for protein in object_list %}
             <option value="{{ protein.Protein_ID }}" >{{ protein.Protein_ID }}</option>

@@ -1,9 +1,15 @@
 {% extends 'static/base.html' %}
 {% load i18n %} {% load staticfiles %}
-{% block title %}Common Keys among the Proteins{% endblock title %}
+{% block title %}Sequence numbers{% endblock title %}
+
+{% block header_title %}
+<h2 class="wow fadeInDown">
+    <i class="fa fa-bars"></i> Sequence Numbers
+</h2>
+{% endblock header_title %}
 
 {% block body %}
-<h1 align="center">Common keys among the proteins {{ s }} are:</h1>
+<h1 align="center">Sequence numbers of the protein {{ s }} are:</h1>
 
 <div clas="table-responsive">
     <table class="table table-bordered table-striped table-hover">
@@ -13,9 +19,9 @@
             </tr>
         </thead>
         <tbody>
-            {% for key in i %}
+            {% for seq in i %}
             <tr>
-                <td>{{ key }}</td>
+                <td>{{ seq.Seq_ID }}</td>
             </tr>
             {% endfor %}
         </tbody>

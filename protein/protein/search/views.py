@@ -3,9 +3,16 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from django.db.models.aggregates import Count
 from django.db.models import Q
+from django.views.generic.list import ListView
 
 from compare.models import ALL_PROTEINS
 from compare.models import POSITION_INFORMATION
+from compare.models import PROTEIN_HIERARCHY
+
+
+class SearchByProteinID(ListView):
+    model = PROTEIN_HIERARCHY
+    template_name = 'choice3.html'
 
 
 def display_3(request):
@@ -42,10 +49,23 @@ def display_3(request):
     return render(request, 'response1.html', context)
 
 
-def display_4(request):
+class SearchByProteinIDAndSeq(ListView):
+    model = PROTEIN_HIERARCHY
+    template_name = "choice4.html"
+
+
+def display_4_step1(request):
     context = {}
-    pid = request.POST["list4"]
-    seq_id_queryset = POSITION_INFORMATION.objects.filter(
-        Protein_ID_id=str(pid)).values('Seq_ID')
-    context['i'] = seq_id_queryset
+    if request.method == 'POST':
+        pid = request.POST["list4"]
+        seq_id_queryset = POSITION_INFORMATION.objects.filter(
+            Protein_ID_id=str(pid)).values('Seq_ID')
+        context['i'] = seq_id_queryset
+    return render(request, 'choice4_1.html', context)
+
+
+def display_4_step2(request):
+    context = {}
+    if request.method == 'POST':
+        seq_list = request.POST.getlist["list4_1"]
     return render(request, 'response2.html', context)
