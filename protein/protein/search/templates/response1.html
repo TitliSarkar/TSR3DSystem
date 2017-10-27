@@ -4,12 +4,13 @@
 
 {% block header_title %}
 <h2 class="wow fadeInDown">
-    <i class="fa fa-key"></i> Common keys
+    <i class="fa fa-bar-chart"></i> Search Results
 </h2>
 {% endblock header_title %}
 
 {% block body %}
-<h1 align="center">Common keys among the proteins {{ s }} are:</h1>
+<h1 align="center">Common keys among the proteins 
+    {% for key in s %} {{ key }}, {% endfor %} are:</h1>
 
 <div clas="table-responsive">
     <table class="table table-bordered table-striped table-hover">
