@@ -23,6 +23,7 @@ def display_3(request):
     """
     context = {}
     s = request.POST.getlist("list3")
+    context['s'] = s
     qs = ALL_PROTEINS.objects.filter(Protein_ID_id__in=s) \
         .distinct()\
         .values('Protein_Key')\
@@ -34,7 +35,6 @@ def display_3(request):
     for dict in qs:
         db_rows.append(dict.get('Protein_Key'))
     context['i'] = db_rows
-
     keys_dict = {}
     for key in db_rows:
         qs_desc_list = []
@@ -46,6 +46,7 @@ def display_3(request):
         keys_dict[str(key)] = qs_desc_list
 
     context['j'] = keys_dict
+    print(context['j'])
     return render(request, 'response1.html', context)
 
 
@@ -57,9 +58,9 @@ class SearchByProteinIDAndSeq(ListView):
 def display_4_step1(request):
     context = {}
     if request.method == 'POST':
-        pid = request.POST["list4"]
+        pid = request.POST.get("list4")
         seq_id_queryset = POSITION_INFORMATION.objects.filter(
-            Protein_ID_id=str(pid)).values('Seq_ID')
+            Q(Protein_ID=str(pid))).values('Seq_ID')
         context['i'] = seq_id_queryset
     return render(request, 'choice4_1.html', context)
 
@@ -67,5 +68,18 @@ def display_4_step1(request):
 def display_4_step2(request):
     context = {}
     if request.method == 'POST':
-        seq_list = request.POST.getlist["list4_1"]
+        seq_list = request.POST.getlist("list4_1")
+        context['seq_list'] = seq_list
+        qs = POSITION_INFORMATION.objects.filter(Seq_ID__in=seq_list)\
+            .distinct().values('Protein_ID').order_by('Protein_ID')
+        pid_list = []
+        for dict in qs:
+            pid_list.append(dict.get('Protein_ID'))
+
+        qs = ALL_PROTEINS.objects.filter(Protein_ID_id__in=pid_list)\
+            .values('Protein_ID_id', 'Protein_Key')\
+            .order_by('Protein_Key')\
+            .distinct()
+        context['i'] = qs
+        print(context['i'])
     return render(request, 'response2.html', context)

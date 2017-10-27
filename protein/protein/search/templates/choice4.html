@@ -27,22 +27,20 @@ function list4Changed()
 
 {% block body %}
 <form name="displayform" method="POST" action="{% url 'search_by_pid_seq_search' %}">{% csrf_token %}
-    <h2 align="center">Do You Want to search by Protein IDs and Sequence numbers?</h2>
-    <br>
-	<label><b>Select PDB IDs you want to search for common keys: </b></label>
-    <select id="list4" name="list4" size=5 style="min-width: 200px"  onclick='list4Changed(this.value);'>
-        <option  disabled selected>Select</option>
+    <h2>Select PDB IDs you want to search for common keys:</h2>
+    <div class="centered">
+        <select id="list4" name="list4" size=5 style="min-width: 200px"  onclick='list4Changed(this.value);'>
             {% for protein in object_list %}
             <option value="{{ protein.Protein_ID }}" >{{ protein.Protein_ID }}</option>
             {% empty %}
             <option value="">NO VALUES YET</option>
             {% endfor %}
-    </select>
-    <br><br><br>
-    <br>
-    <p id="demo4"></p>
-    <div style="text-align:center;">
-        <input type="submit" value="RUN THE COMPARISON" style="margin:30px auto; display:block;" />
-    </div>
+        </select>
+        <br><br><br><br>
+        <p id="demo4"></p>
+        <button type="submit" class="btn btn-primary">
+            <i class="fa fa-search"></i> Search
+        </button>
+    </div><!--centered-->
 </form>
 {% endblock %}

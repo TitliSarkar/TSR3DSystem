@@ -1,27 +1,30 @@
 {% extends 'static/base.html' %}
 {% load i18n %} {% load staticfiles %}
-{% block title %}Sequence numbers{% endblock title %}
+{% block title %}Search Results{% endblock title %}
 
 {% block header_title %}
 <h2 class="wow fadeInDown">
-    <i class="fa fa-bars"></i> Sequence Numbers
+    <i class="fa fa-bar-chart"></i> Search Results
 </h2>
 {% endblock header_title %}
 
 {% block body %}
-<h1 align="center">Sequence numbers of the protein {{ s }} are:</h1>
+<h1 align="center">Proteins containing {{ seq_list.0 }}, {{ seq_list.1 }} {{ seq_list.2 }} amino acids</h1>
 
 <div clas="table-responsive">
     <table class="table table-bordered table-striped table-hover">
         <thead>
             <tr>
-                <th>Sequence IDs</th>
+                <th>Protein IDs</th>
+                <th>Protein Key</th>
             </tr>
         </thead>
         <tbody>
-            {% for seq in i %}
+            {% for protein in i %}
             <tr>
-                <td>{{ seq.Seq_ID }}</td>
+                {% for key, values in protein.items %}
+                <td>{{ values }}</td>
+                {% endfor %}
             </tr>
             {% endfor %}
         </tbody>
