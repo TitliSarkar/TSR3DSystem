@@ -10,14 +10,16 @@
 <script type="text/javascript">
 function list1Changed(choice)
     {
-      document.getElementById("demo").innerHTML = 'Selected choice from list1  : '+choice;
+        document.getElementById("demo").innerHTML = 'Selected choice from list1  : <span class="badge badge1">' + choice + '</span>';
     }
 function list2Changed()
     {
       var str="",i;
       for (i=0;i<displayform.list2.options.length;i++) {
           if (displayform.list2.options[i].selected) {
+              str = str + '<span class="badge badge3">'; 
               str = str + displayform.list2.options[i].value + " ";
+              str = str + '</span> ';
           }
       }
       document.getElementById("demo1").innerHTML = 'Selected choice from list2  : '+str;
@@ -32,7 +34,6 @@ function list2Changed()
     <h2 align="center">Do You Want to do comparison by Protein IDs ?</h2>
 	<label><b>Select PDB ID you want to compare:</b></label>i
     <select id="list1" name="list1" onclick='list1Changed(this.value);' style="margin:20px;min-width: 200px">
-        <option  disabled selected>Select</option>
         <option value="1bo1" >1bo1</option>
         <option value="1ia9" >1ia9</option>
         <option value="1e8x" >1e8x</option>

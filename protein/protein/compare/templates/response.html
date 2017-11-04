@@ -1,28 +1,58 @@
 {% extends 'static/base.html' %}
+{% load i18n %} {% load staticfiles %}
+{% block title %}Similarity values of proteinteins being compared{% endblock title %}
+
+{% block header_title %}
+<h2 class="wow fadeindown">
+    <i class="fa fa-bar-chart"></i> Comparison results
+</h2>
+{% endblock header_title %}
 
 {% block body %}
 
-<h1 align="center">Results of Comparison with {{ s1 }} :</h1>
+<h1 align="center">Results of Comparison with {{ protein_compared }} :</h1>
 <h2>Similarity Values are shown below:</h2><br>
 
-    <table cellpadding="10" border="1">
-    <tr>
-        <th>Protein_ID</th>
-        <th>Similarity_Value</th>
-        <th>Class</th>
-        <th>Architecture</th>
-        <th>TopologyFold</th>
-        <th>HomologySuperfamily</th>
-    </tr>
-    {% for pro in i %}
-        <tr>
-        <td>{{ pro.ProtId }}</td>
-        <td>{{ pro.similarity }}</td>
-        <td>{{ pro.class}}</td>
-        <td>{{ pro.archi }}</td>
-        <td>{{ pro.topfold }}</td>
-        <td>{{ pro.homsup }}</td>
-        </tr>
-    {% endfor %}
+{% if no_result_found %}
+<div class="row">
+    <div class="alert alert-info">
+        <i class="fa fa-info-circle"></i> No matching results found in the Database
+    </div><!--alert alert-success-->
+</div><!--row-->
+{% else %}
+<div clas="table-responsive">
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>protein ID</th>
+                <th>Similarity Value</th>
+                <th>Class</th>
+                <th>Class Description</th>
+                <th>Architecture</th>
+                <th>Architecture Description</th>
+                <th>Topology Fold</th>
+                <th>Topology Fold Description</th>
+                <th>Homology Superfamily</th>
+                <th>Homology Superfamily Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for protein in protein_details_list %}
+            <tr>
+                <td>{{ protein.ProtId }}</td>
+                <td>{{ protein.similarity }}</td>
+                <td>{{ protein.class}}</td>
+                <td>{{ protein.class_desc }}</td>
+                <td>{{ protein.archi }}</td>
+                <td>{{ protein.archi_desc }}</td>
+                <td>{{ protein.topfold }}</td>
+                <td>{{ protein.topfold_desc }}</td>
+                <td>{{ protein.homsup }}</td>
+                <td>{{ protein.homsup_desc }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
-{% endblock %}
+</div> <!--table-responsive-->
+{% endif %}
+{% endblock body %}

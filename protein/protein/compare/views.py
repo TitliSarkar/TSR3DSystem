@@ -23,23 +23,58 @@ from compare.models import POSITION_INFORMATION
 
 def display_1(request):
     context = {}
-    if request.method == "POST":
-        s1 = request.POST["list1"]
-        s2 = request.POST.getlist("list2[]")
-        context['s1'] = s1
-        row_val = []
-        for i in s2:
-            res = SIMILARITY_INFORMATION.objects.get(Protein_ID1_id=str(s1), Protein_ID2_id=str(i))
-            sim = res.Similarity_Value
-            res1 = PROTEIN_HIERARCHY.objects.get(Protein_ID=str(i))
-            row_val.append({'ProtId': str(i),
-                            'similarity': str(sim),
-                            'class': str(res1.Class_id),
-                            'archi': str(res1.Architecture_id),
-                            'topfold': str(res1.TopologyFold_id),
-                            'homsup': str(res1.HomologySuperfamily_id)})
 
-        context['i'] = row_val
+    if request.method == "GET":
+        context['no_result_found'] = True
+
+    if request.method == "POST":
+        row_val = []
+        protein_compared = request.POST["list1"]
+        protein_list = request.POST.getlist("list2")
+        context['protein_compared'] = protein_compared
+
+        for protein in protein_list:
+            similarity_info_queryset = SIMILARITY_INFORMATION.objects.filter(
+                Protein_ID1_id=str(protein_compared),
+                Protein_ID2_id=str(protein))
+
+            print(similarity_info_queryset)
+
+            if not similarity_info_queryset:
+                context['no_result_found'] = True
+                return render(request, 'response.html', context)
+
+            similarity_value = similarity_info_queryset[0].Similarity_Value
+
+            hierarchy_result = PROTEIN_HIERARCHY.objects.get(
+                Protein_ID=str(protein))
+
+            class_result = CLASS_DESCRIPTION.objects.get(
+                Class=hierarchy_result.Class_id)
+
+            architecture_result = ARCHITECTURE_DESCRIPTION.objects.get(
+                Architecture=hierarchy_result.Architecture_id)
+
+            topology_result = TOPOLOGYFOLD_DESCRIPTION.objects.get(
+                TopologyFold=hierarchy_result.TopologyFold_id)
+
+            homology_result = HOMOLOGYSUPERFAMILY_DESCRIPTION.objects.get(
+                HomologySuperfamily=hierarchy_result.HomologySuperfamily_id)
+
+            row_val.append({
+                'ProtId': str(protein),
+                'similarity': str(similarity_value),
+                'class': str(hierarchy_result.Class_id),
+                'class_desc': str(class_result.DescriptionOfClass),
+                'archi': str(hierarchy_result.Architecture_id),
+                'archi_desc': str(architecture_result.DescriptionOfArchitecture),
+                'topfold': str(hierarchy_result.TopologyFold_id),
+                'topfold_desc': str(topology_result.DescriptionOfTopologyFold),
+                'homsup': str(hierarchy_result.HomologySuperfamily_id),
+                'homsup_desc': str(homology_result.DescriptionOfHomologySuperfamily)
+            })
+
+        context['protein_details_list'] = row_val
     return render(request, 'response.html', context)
 
 
