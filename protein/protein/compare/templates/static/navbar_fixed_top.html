@@ -49,6 +49,11 @@
                 <i class='fa fa-search'></i> {% trans "Protein ID" %}
               </a>
             </li>
+            <li class="{% if request.resolver_match.url_name == 'search_by_pid_seq_home' %}active{% endif %}">
+              <a href="{% url 'search_by_pid_seq_home' %}">
+                <i class='fa fa-search'></i> {% trans "Protein ID and Seq" %}
+              </a>
+            </li>
           </ul>
           <!-- dropdown-menu -->
         </li>

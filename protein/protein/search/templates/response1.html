@@ -9,28 +9,36 @@
 {% endblock header_title %}
 
 {% block body %}
-<h1 align="center">Common keys among the proteins 
-    {% for key in s %} {{ key }}, {% endfor %} are:</h1>
+<h1 align="center">
+    Common keys among the proteins 
+    {% for key in protein_list %} {{ key }}, {% endfor %} 
+    are:
+</h1>
 
 <div clas="table-responsive">
     <table class="table table-bordered table-striped table-hover">
         <thead>
             <tr>
                 <th>Common Keys</th>
-                <th>Position Details</th>
+                <th align="right">Position Details</th>
             </tr>
         </thead>
         <tbody>
-            {% for key in i %}
+            {% for key in protein_keys_list %}
             <tr>
                 <td>{{ key }}</td>
-                <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{ key }}modal">Details</button>
+                <td align="right">
+                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target="#{{ key }}modal">
+                        <i class="fa fa-expand"></i> Details
+                    </button>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 </div>
-{% for key, value in j.items %}
+{% for key, value in protein_keys_dict.items %}
 <div class="modal fade {{ key }}-modal" id="{{ key}}modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel{{ key }}">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">

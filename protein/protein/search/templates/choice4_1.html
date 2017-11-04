@@ -32,7 +32,7 @@ function list4_1Changed()
         <select id="list4_1" name="list4_1" size=5 style="min-width: 200px" 
             multiple="multiple" onclick='list4_1Changed(this.value);'>
             <option  disabled selected>Select</option>
-            {% for seq_dict in i  %}
+            {% for seq_dict in seq_list %}
             {% for key, values in seq_dict.items %}
             <option value="{{ values }}" >{{ values }}</option>
             {% empty %}
