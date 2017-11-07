@@ -2,10 +2,12 @@ from django.conf.urls import url
 from django.views.generic import TemplateView
 
 from compare import views
+from compare.views import CompareByProteinID
+
 
 urlpatterns = [
     url(r'^proteinid/$',
-        TemplateView.as_view(template_name='choice1.html'),
+        CompareByProteinID.as_view(),
         name="compare_by_pid_home"),
 
     url(r'^byprotienid/result/$',

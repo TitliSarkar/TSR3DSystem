@@ -31,85 +31,38 @@ function list2Changed()
 {% block body %}
 <form name="displayform" method="POST" action="{% url 'compare_by_pid_result' %}">
     {% csrf_token %}
-    <h2 align="center">Do You Want to do comparison by Protein IDs ?</h2>
-	<label><b>Select PDB ID you want to compare:</b></label>i
-    <select id="list1" name="list1" onclick='list1Changed(this.value);' style="margin:20px;min-width: 200px">
-        <option value="1bo1" >1bo1</option>
-        <option value="1ia9" >1ia9</option>
-        <option value="1e8x" >1e8x</option>
-        <option value="1cja" >1cja</option>
-        <option value="1nw1" >1nw1</option>
-  	    <option value="1j7u" >1j7u</option>
-      	<option value="1cdk" >1cdk</option>
-        <option value="1o6l" >1o6l</option>
-        <option value="1omw" >1omw</option>
-        <option value="1h1w" >1h1w</option>
-        <option value="1tki" >1tki</option>
-        <option value="1jkl" >1jkl</option>
-        <option value="1a06" >1a06</option>
-        <option value="1phk" >1phk</option>
-        <option value="1kwp" >1kwp</option>
-        <option value="1ia8" >1ia8</option>
-        <option value="1csn" >1csn</option>
-        <option value="1gng" >1gng</option>
-        <option value="1hck" >1hck</option>
-        <option value="1jnk" >1jnk</option>
-        <option value="1how" >1how</option>
-        <option value="1lp4" >1lp4</option>
-        <option value="1muo" >1muo</option>
-        <option value="1o6y" >1o6y</option>
-        <option value="1f3m" >1f3m</option>
-        <option value="1b6c" >1b6c</option>
-        <option value="2src" >2src</option>
-        <option value="1luf" >1luf</option>
-        <option value="1ir3" >1ir3</option>
-        <option value="1m14" >1m14</option>
-        <option value="1gjo" >1gjo</option>
-    </select>
-    <br>
-    <p id="demo"></p>
-    <br>
-    <label><b>Select PDB IDs you want to compare : </b></label>i
-    <select id="list2" name="list2" size=5 style="min-width: 200px" multiple="multiple" onclick='list2Changed(this.value);'>
-        <option  disabled selected>Select</option>
-      	<option value="1bo1" >1bo1</option>
-  	    <option value="1ia9" >1ia9</option>
-      	<option value="1e8x" >1e8x</option>
-  	    <option value="1cja" >1cja</option>
-      	<option value="1nw1" >1nw1</option>
-  	    <option value="1j7u" >1j7u</option>
-  		<option value="1cdk" >1cdk</option>
-        <option value="1o6l" >1o6l</option>
-        <option value="1omw" >1omw</option>
-        <option value="1h1w" >1h1w</option>
-        <option value="1tki" >1tki</option>
-        <option value="1jkl" >1jkl</option>
-        <option value="1a06" >1a06</option>
-        <option value="1phk" >1phk</option>
-        <option value="1kwp" >1kwp</option>
-        <option value="1ia8" >1ia8</option>
-        <option value="1csn" >1csn</option>
-        <option value="1gng" >1gng</option>
-        <option value="1hck" >1hck</option>
-        <option value="1jnk" >1jnk</option>
-        <option value="1how" >1how</option>
-        <option value="1lp4" >1lp4</option>
-        <option value="1muo" >1muo</option>
-        <option value="1o6y" >1o6y</option>
-        <option value="1f3m" >1f3m</option>
-        <option value="1b6c" >1b6c</option>
-        <option value="2src" >2src</option>
-        <option value="1luf" >1luf</option>
-        <option value="1ir3" >1ir3</option>
-        <option value="1m14" >1m14</option>
-        <option value="1gjo" >1gjo</option>
-	</select>
-    <br><br><br>
-    <br>
-    <p id="demo1"></p>
-    <div style="text-align:center;">
-        <input type="submit" value="RUN THE COMPARISON" style="margin:30px auto; display:block;" />
-    </div>
+    <h2>Select PDB ID you want to compare:</h2>
+    <div class="centered">
+        <select id="list1" name="list1"
+            onclick='list1Changed(this.value);'
+            style="margin:20px;min-width: 200px">
+            {% for protein in object_list %}
+            <option value="{{ protein.Protein_ID }}" >{{ protein.Protein_ID }}</option>
+            {% empty %}
+            <option value="">NO VALUES YET</option>
+            {% endfor %}
+        </select>
+        <br>
+        <p id="demo"></p>
+        <br>
+    </div><!--centered-->
+    <h2>Select PDB IDs you want to compare:</h2>
+    <div class="centered">
+        <select id="list2" name="list2" size=5
+            style="min-width: 200px" multiple="multiple"
+            onclick='list2Changed(this.value);'>
+            {% for protein in object_list %}
+            <option value="{{ protein.Protein_ID }}" >{{ protein.Protein_ID }}</option>
+            {% empty %}
+            <option value="">NO VALUES YET</option>
+            {% endfor %}
+        </select>
+        <br><br><br><br>
+        <p id="demo1"></p>
+        <button type="submit" class="btn btn-primary">
+            <i class="fa fa-balance-scale"></i> Compare Proteins
+        </button>
+    </div><!--centered-->
 	</form>
 
 {% endblock body %}

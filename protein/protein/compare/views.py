@@ -21,6 +21,11 @@ from compare.models import ALL_PROTEINS
 from compare.models import POSITION_INFORMATION
 
 
+class CompareByProteinID(ListView):
+    model = PROTEIN_HIERARCHY
+    template_name = "choice1.html"
+
+
 def display_1(request):
     context = {}
 
