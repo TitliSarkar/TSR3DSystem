@@ -1,8 +1,8 @@
 from django.conf.urls import url
-from django.views.generic import TemplateView
 
 from compare import views
 from compare.views import CompareByProteinID
+from compare.views import CompareByHierarchy
 
 
 urlpatterns = [
@@ -15,7 +15,7 @@ urlpatterns = [
         name='compare_by_pid_result'),
 
     url(r'^byhierarchy/$',
-        TemplateView.as_view(template_name='choice2.html'),
+        CompareByHierarchy.as_view(),
         name="compare_by_hl_home"),
 
     url(r'^byhierarchy/result/$',

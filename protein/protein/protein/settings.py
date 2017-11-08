@@ -76,4 +76,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (MEDIA_ROOT,)
 
+COMPARE_DIR = os.path.join(BASE_DIR, "compare")
+HIERARCHY_FILE = os.path.join(COMPARE_DIR, "hierarchy.csv")
+
 from local_settings import *
