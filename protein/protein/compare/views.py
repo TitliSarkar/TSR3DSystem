@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # django imports
 from django.shortcuts import render
 from django.views.generic.list import ListView
@@ -15,10 +16,10 @@ from compare.helper import get_hierarchy_list
 
 class CompareByProteinID(ListView):
     model = PROTEIN_HIERARCHY
-    template_name = "choice1.html"
+    template_name = "compare_by_pid_home.html"
 
 
-def display_1(request):
+def compare_by_protein_id_result(request):
     context = {}
 
     if request.method == "GET":
@@ -69,15 +70,15 @@ def display_1(request):
             })
 
         context['protein_details_list'] = row_val
-    return render(request, 'protein_compare_result.html', context)
+    return render(request, 'compare_by_pid_result.html', context)
 
 
 class CompareByHierarchy(ListView):
     model = PROTEIN_HIERARCHY
-    template_name = "choice2.html"
+    template_name = "compare_by_hl_home.html"
 
 
-def display_2(request):
+def compare_by_hierarchy_result(request):
     context = {}
 
     if request.method == "GET":
@@ -113,8 +114,6 @@ def display_2(request):
 
             for hresult in hierarchy_result:
                 protein_list.append(hresult.Protein_ID)
-
-        print(protein_list)
 
         for protein in protein_list:
             similarity_info_queryset = SIMILARITY_INFORMATION.objects.filter(
@@ -155,6 +154,4 @@ def display_2(request):
 
         context['protein_compared'] = protein_id
         context['protein_details_list'] = row_val
-        print(context)
-
-    return render(request, 'hierarchy_response.html', context)
+    return render(request, 'compare_by_hl_result.html', context)

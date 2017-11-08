@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.conf.urls import url
 
 from search import views
@@ -11,7 +12,7 @@ urlpatterns = [
         name="search_by_pid_home"),
 
     url(r'^proteinid/result/$',
-        views.display_3,
+        views.search_by_protein_id,
         name='search_by_pid_result'),
 
     url(r'^proteinid-seq/$',
@@ -19,10 +20,10 @@ urlpatterns = [
         name="search_by_pid_seq_home"),
 
     url(r'^proteinid-seq/seq/$',
-        views.display_4_step1,
+        views.search_by_protein_id_seq_step1,
         name='search_by_pid_seq_search'),
 
     url(r'^protenid-seq/seq/result/$',
-        views.display_4_step2,
+        views.search_by_protein_id_seq_step2,
         name='search_by_pid_seq_search_result'),
 ]

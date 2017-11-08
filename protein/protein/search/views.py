@@ -12,10 +12,10 @@ from compare.models import PROTEIN_HIERARCHY
 
 class SearchByProteinID(ListView):
     model = PROTEIN_HIERARCHY
-    template_name = 'choice3.html'
+    template_name = 'search_by_pid_home.html'
 
 
-def display_3(request):
+def search_by_protein_id(request):
     """
     Input: A set of protein ids
     Output: Commom keys, by clicking on each keys, displays
@@ -50,15 +50,15 @@ def display_3(request):
     context['protein_keys_list'] = protein_keys_list
     context['protein_keys_dict'] = protein_keys_dict
 
-    return render(request, 'response1.html', context)
+    return render(request, 'search_by_pid_result.html', context)
 
 
 class SearchByProteinIDAndSeq(ListView):
     model = PROTEIN_HIERARCHY
-    template_name = "choice4.html"
+    template_name = "search_by_pid_seq_home.html"
 
 
-def display_4_step1(request):
+def search_by_protein_id_seq_step1(request):
     context = {}
     if request.method == 'POST':
         pid = request.POST.get("list4")
@@ -67,10 +67,10 @@ def display_4_step1(request):
             .values('Seq_ID')
         context['seq_list'] = seq_id_queryset
 
-    return render(request, 'choice4_1.html', context)
+    return render(request, 'search_by_pid_seq_search.html', context)
 
 
-def display_4_step2(request):
+def search_by_protein_id_seq_step2(request):
     context = {}
     if request.method == 'POST':
         protein_key_list = []
@@ -104,4 +104,4 @@ def display_4_step2(request):
         context['protein_keys_list'] = protein_key_list
         context['protein_keys_dict'] = protein_keys_dict
 
-    return render(request, 'response2.html', context)
+    return render(request, 'search_by_pid_seq_search_result.html', context)

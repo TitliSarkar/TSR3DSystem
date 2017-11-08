@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.conf.urls import url
 
 from compare import views
@@ -11,7 +12,7 @@ urlpatterns = [
         name="compare_by_pid_home"),
 
     url(r'^byprotienid/result/$',
-        views.display_1,
+        views.compare_by_protein_id_result,
         name='compare_by_pid_result'),
 
     url(r'^byhierarchy/$',
@@ -19,6 +20,6 @@ urlpatterns = [
         name="compare_by_hl_home"),
 
     url(r'^byhierarchy/result/$',
-        views.display_2,
+        views.compare_by_hierarchy_result,
         name='compare_by_hl_result'),
 ]
