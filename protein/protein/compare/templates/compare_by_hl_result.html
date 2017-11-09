@@ -10,15 +10,18 @@
 
 {% block body %}
 <h1 align="center">Results of Comparison with {{ protein_compared }} :</h1>
+
 {% if no_result_found %}
 <div class="row">
     <div class="alert alert-info">
         <i class="fa fa-info-circle"></i> No matching results found in the Database
     </div><!--alert alert-success-->
 </div><!--row-->
+
 {% else %}
 <div clas="table-responsive">
-    <table class="table table-bordered table-striped table-hover">
+    
+	<table class="table table-bordered table-striped table-hover">
         <thead>
             <tr>
                 <th>protein ID</th>

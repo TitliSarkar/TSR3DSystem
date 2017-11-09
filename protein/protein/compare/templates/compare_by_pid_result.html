@@ -3,15 +3,14 @@
 {% block title %}Similarity values of proteinteins being compared{% endblock title %}
 
 {% block header_title %}
-<h2 class="wow fadeindown">
-    <i class="fa fa-bar-chart"></i> Comparison results
-</h2>
+
 {% endblock header_title %}
 
 {% block body %}
-
-<h1 align="center">Results of Comparison with {{ protein_compared }} :</h1>
+<a href="/" class="btn btn-primary">Back to Home</a>
+<h1 align="center"><i class="fa fa-bar-chart"></i>  Results of Comparison with {{ protein_compared }} :</h1>
 <h2>Similarity Values are shown below:</h2><br>
+
 
 {% if no_result_found %}
 <div class="row">

@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Application definition
 
@@ -26,11 +26,26 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
 ]
 
+ALLOWED_HOSTS = []
+DEBUG = True
+
 PROTEIN_APPS = [
     'compare',
     'search'
 ]
-
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ProteinDB',
+        'USER': 'root',
+        'PASSWORD': '123456',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+        'OPTIONS': {
+            'sql_mode': 'traditional',
+        }
+    }
+}
 INSTALLED_APPS = DJANGO_APPS + PROTEIN_APPS
 
 MIDDLEWARE = ['django.contrib.sessions.middleware.SessionMiddleware',
@@ -63,7 +78,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'protein.wsgi.application'
 
-
+SECRET_KEY = '0ju&3d_@t0ltpc^oxx4*prg^46029tty0^298!-_6all+2)_*-'
 # Media files (CSS, JavaScript, Images)
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
@@ -79,4 +94,7 @@ STATICFILES_DIRS = (MEDIA_ROOT,)
 COMPARE_DIR = os.path.join(BASE_DIR, "compare")
 HIERARCHY_FILE = os.path.join(COMPARE_DIR, "hierarchy.csv")
 
-from local_settings import *
+try:
+    from local_settings import *
+except ImportError:
+    pass
