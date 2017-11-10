@@ -1,22 +1,25 @@
+# -*- coding: utf-8 -*-
 from django.conf.urls import url
-from . import views
 
-app_name = 'compare'
+from compare import views
+from compare.views import CompareByProteinID
+from compare.views import CompareByHierarchy
+
 
 urlpatterns = [
+    url(r'^proteinid/$',
+        CompareByProteinID.as_view(),
+        name="compare_by_pid_home"),
 
-    #/compare/
-    url(r'^$', views.index, name='index'),
+    url(r'^byprotienid/result/$',
+        views.compare_by_protein_id_result,
+        name='compare_by_pid_result'),
 
-    #/compare/display/
-    url(r'^display/$', views.display, name='display'),
+    url(r'^byhierarchy/$',
+        CompareByHierarchy.as_view(),
+        name="compare_by_hl_home"),
 
-    #/compare/display1/
-    url(r'^display1/$', views.display_1, name='display_1'),
-
-    #/compare/display2/
-    url(r'^display2/$', views.display_2, name='display_2'),
-
-    #/compare/display3/
-    url(r'^display3/$', views.display_3, name='display_3'),
+    url(r'^byhierarchy/result/$',
+        views.compare_by_hierarchy_result,
+        name='compare_by_hl_result'),
 ]

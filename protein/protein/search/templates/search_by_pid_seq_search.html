@@ -1,0 +1,50 @@
+{% extends 'static/base.html' %}
+{% block title %}Select the Seq{% endblock title %}
+
+{% block header_title %}
+<h2 class="wow fadeInDown">
+    <i class="fa fa-search"></i> Select the Sequences
+</h2>
+{% endblock header_title %}
+
+{% block script %}
+<script type="text/javascript">
+
+function list4_1Changed()
+    {
+      var str="",i;
+      for (i=0;i<displayform.list4_1.options.length;i++) {
+          if (displayform.list4_1.options[i].selected) {
+              str = str + '<span class="badge badge1">' 
+                  + displayform.list4_1.options[i].value + '</span> ';
+          }
+      }
+        document.getElementById("demo4").innerHTML = 'Selected choice from list: ' + str ;
+    }
+
+</script>
+{% endblock script %}
+
+{% block body %}
+<form name="displayform" method="POST" action="{% url 'search_by_pid_seq_search_result' %}">{% csrf_token %}
+    <h2 align="center">Select three sequences which you want to search</h2>
+    <div class="centered">
+        <select id="list4_1" name="list4_1" size=5 style="min-width: 200px" 
+            multiple="multiple" onclick='list4_1Changed(this.value);'>
+            <option  disabled selected>Select</option>
+            {% for seq_dict in seq_list %}
+            {% for key, values in seq_dict.items %}
+            <option value="{{ values }}" >{{ values }}</option>
+            {% empty %}
+            <option value="">NO VALUES YET</option>
+            {% endfor %}
+            {% endfor %}
+        </select>
+        <br><br><br><br>
+        <p id="demo4"></p>
+        <button type="submit" class="btn btn-primary">
+            <i class="fa fa-search"></i> Search
+        </button>
+    </div><!--centered-->
+</form>
+{% endblock %}

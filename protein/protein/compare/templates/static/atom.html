@@ -1,0 +1,58 @@
+{% load staticfiles %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="messageApp">
+
+<head>
+  <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" />
+  <title> {% block title %} {% endblock %}</title>
+  {% block style_base %}
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/railscasts.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.css" rel="stylesheet">
+  <link type="text/css" href="{% static 'css/errors.css' %}" rel="stylesheet">
+  <link type="text/css" href="{% static 'css/startbootstrap.css' %}" rel="stylesheet" />
+  <link type="text/css" href="{% static 'css/styles.css' %}" rel="stylesheet" />
+  <link type="text/css" href="{% static 'css/templatemo-style.css' %}" rel="stylesheet" /> {% endblock style_base %} {% block style_extra %} {% endblock style_extra %} {% block script_base %}
+  <!-- SCRIPTS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" integrity="sha256-ivk71nXhz9nsyFDoYoGf2sbjrR9ddh+XDkCcfZxjvcM= sha512-7aMbXH03HUs6zO1R+pLyekF1FTF89Deq4JpHw6zIo2vbtaXnDw+/2C03Je30WFDd6MpSwg+aLW4Di46qzu488Q==" crossorigin="anonymous"></script>
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
+  <script>
+    new WOW().init();
+  </script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  <!-- END SCRIPTS -->
+  {% endblock script_base %}
+</head>
+
+<body class="{% block body_class %}{% endblock %}" id="{% block body_id %}{% endblock %}" ng-controller="MainCtrl">
+  <div id="wrap">
+    <!-- NAVBAR BEGINS HERE -->
+    {% block navbar %} {% include 'static/navbar_fixed_top.html' %} {% endblock navbar %}
+    <!-- end of NAVBAR -->
+    <!-- HEADER -->
+    {% block header %} {% endblock header %}
+    <!-- END OF HEADER -->
+    <!-- Content -->
+    {% block content %} {% endblock content %}
+    <!-- end of content -->
+  </div>
+  <!--wrap-->
+  <!-- FOOTER -->
+  {% block footer %} {% include 'static/footer.html'%} {% endblock footer %}
+  <!-- FOOTER ENDS -->
+  {% block script %} {% endblock script %}
+</body>
+
+</html>

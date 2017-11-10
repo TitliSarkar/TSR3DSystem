@@ -1,0 +1,68 @@
+{% extends "static/base.html" %}
+{% block title %}Compare by Protein ID{% endblock title %}
+{% block header_title %}
+<h2 class="wow fadeInDown">
+    <i class="fa fa-balance-scale"></i> Compare by Protein ID
+</h2>
+{% endblock header_title %}
+
+{% block script %}
+<script type="text/javascript">
+function list1Changed(choice)
+    {
+        document.getElementById("demo").innerHTML = 'Selected choice from list1  : <span class="badge badge1">' + choice + '</span>';
+    }
+function list2Changed()
+    {
+      var str="",i;
+      for (i=0;i<displayform.list2.options.length;i++) {
+          if (displayform.list2.options[i].selected) {
+              str = str + '<span class="badge badge3">'; 
+              str = str + displayform.list2.options[i].value + " ";
+              str = str + '</span> ';
+          }
+      }
+      document.getElementById("demo1").innerHTML = 'Selected choice from list2  : '+str;
+    }
+
+</script>
+{% endblock script %}
+
+{% block body %}
+<form name="displayform" method="POST" action="{% url 'compare_by_pid_result' %}">
+    {% csrf_token %}
+    <h2>Select PDB ID you want to compare:</h2>
+    <div class="centered">
+        <select id="list1" name="list1"
+            onclick='list1Changed(this.value);'
+            style="margin:20px;min-width: 200px">
+            {% for protein in object_list %}
+            <option value="{{ protein.Protein_ID }}" >{{ protein.Protein_ID }}</option>
+            {% empty %}
+            <option value="">NO VALUES YET</option>
+            {% endfor %}
+        </select>
+        <br>
+        <p id="demo"></p>
+        <br>
+    </div><!--centered-->
+    <h2>Select PDB IDs you want to compare:</h2>
+    <div class="centered">
+        <select id="list2" name="list2" size=5
+            style="min-width: 200px" multiple="multiple"
+            onclick='list2Changed(this.value);'>
+            {% for protein in object_list %}
+            <option value="{{ protein.Protein_ID }}" >{{ protein.Protein_ID }}</option>
+            {% empty %}
+            <option value="">NO VALUES YET</option>
+            {% endfor %}
+        </select>
+        <br><br><br><br>
+        <p id="demo1"></p>
+        <button type="submit" class="btn btn-primary">
+            <i class="fa fa-balance-scale"></i> Compare Proteins
+        </button>
+    </div><!--centered-->
+	</form>
+
+{% endblock body %}

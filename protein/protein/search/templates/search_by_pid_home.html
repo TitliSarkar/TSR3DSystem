@@ -1,0 +1,46 @@
+{% extends 'static/base.html' %}
+{% block title %}Search by Protein ID{% endblock title %}
+
+{% block header_title %}
+<h2 class="wow fadeInDown">
+    <i class="fa fa-search"></i> Search by Protein ID
+</h2>
+{% endblock header_title %}
+{% block script %}
+<script type="text/javascript">
+
+function list3Changed()
+    {
+      var str="",i;
+      for (i=0;i<displayform.list3.options.length;i++) {
+          if (displayform.list3.options[i].selected) {
+              str = str + '<span class="badge badge1">' 
+                  + displayform.list3.options[i].value + '</span> ';
+          }
+      }
+      document.getElementById("demo3").innerHTML = 'Selected choice from list: '+ str;
+    }
+
+</script>
+{% endblock script %}
+
+{% block body %}
+<form name="displayform" method="POST" action="{% url 'search_by_pid_result' %}">{% csrf_token %}
+    <h2>Select PDB IDs you want to search for common keys: </h2>
+    <div class="centered">
+        <select id="list3" name="list3" size=5 style="min-width: 200px"
+            multiple="multiple" onclick='list3Changed(this.value);'>
+            {% for protein in object_list %}
+            <option value="{{ protein.Protein_ID }}" >{{ protein.Protein_ID }}</option>
+            {% empty %}
+            <option value="">NO VALUES YET</option>
+            {% endfor %}
+	    </select>
+        <br><br><br><br>
+        <p id="demo3"></p>
+        <button type="submit" class="btn btn-primary">
+            <i class="fa fa-search"></i> Search
+        </button>
+    </div><!--centered-->
+</form>
+{% endblock %}

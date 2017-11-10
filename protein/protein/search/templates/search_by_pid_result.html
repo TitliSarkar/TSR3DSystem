@@ -1,0 +1,87 @@
+{% extends 'static/base.html' %}
+{% load i18n %} {% load staticfiles %}
+{% block title %}Common Keys among the Proteins{% endblock title %}
+
+{% block header_title %}
+<h2 class="wow fadeInDown">
+    <i class="fa fa-bar-chart"></i> Search Results
+</h2>
+{% endblock header_title %}
+
+{% block body %}
+<h1 align="center">
+    Common keys among the proteins 
+    {% for key in protein_list %} {{ key }}, {% endfor %} 
+    are:
+</h1>
+
+<div clas="table-responsive">
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Common Keys</th>
+                <th align="right">Position Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key in protein_keys_list %}
+            <tr>
+                <td>{{ key }}</td>
+                <td align="right">
+                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target="#{{ key }}modal">
+                        <i class="fa fa-expand"></i> Details
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% for key, value in protein_keys_dict.items %}
+<div class="modal fade {{ key }}-modal" id="{{ key}}modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel{{ key }}">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Key - {{ key }}</h4>
+            </div><!--modal-header-->
+            <div class="modal-body">
+                <div clas="table-responsive">
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Protein ID</th>
+                                <th>Key Occurence</th>
+                                <th>Amino Acid 0</th>
+                                <th>Position 0</th>
+                                <th>Amino Acid 1</th>
+                                <th>Position 1</th>
+                                <th>Amino Acid 2</th>
+                                <th>Position 2</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for val in value %}
+                        {% for protein in val %}
+                            <tr>
+                                <td>{{ protein.Protein_ID.Protein_ID }}</td>
+                                <td>{{ protein.Key_coourence_no }}</td>
+                                <td>{{ protein.aacd0 }}</td>
+                                <td>{{ protein.position0 }}</td>
+                                <td>{{ protein.aacd1 }}</td>
+                                <td>{{ protein.position1 }}</td>
+                                <td>{{ protein.aacd1 }}</td>
+                                <td>{{ protein.position0 }}</td>
+                            </tr>
+                        {% endfor %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div><!-- table-responsive-->
+            </div><!--modal-body-->
+        </div> <!--modal-content -->
+    </div><!--modal-dialog-->
+</div><!--modal fade-->
+{% endfor %}
+{% endblock body %}
