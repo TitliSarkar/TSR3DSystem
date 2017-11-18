@@ -65,6 +65,65 @@ class ALL_PROTEINS(models.Model):
     z2 = models.FloatField(default=0.0)
 
 
+class ALL_PROTEINS_BIG_UNINDEXED(models.Model):
+    Protein_ID = models.ForeignKey(
+        PROTEIN_HIERARCHY,
+        to_field='Protein_ID',
+        on_delete=models.CASCADE)
+    Protein_Key = models.IntegerField()
+    Key_coourence_no = models.IntegerField(default=0)
+    aacd0 = models.CharField(max_length=5, null=True)
+    position0 = models.CharField(max_length=5, null=True)
+    aacd1 = models.CharField(max_length=5, null=True)
+    position1 = models.CharField(max_length=5, null=True)
+    aacd2 = models.CharField(max_length=5, null=True)
+    position2 = models.CharField(max_length=5, null=True)
+    classT1 = models.IntegerField(default=0)
+    Theta = models.FloatField(default=0.0)
+    classL1 = models.IntegerField(default=0)
+    maxDist = models.FloatField(default=0.0)
+    x0 = models.FloatField(default=0.0)
+    y0 = models.FloatField(default=0.0)
+    z0 = models.FloatField(default=0.0)
+    x1 = models.FloatField(default=0.0)
+    y1 = models.FloatField(default=0.0)
+    z1 = models.FloatField(default=0.0)
+    x2 = models.FloatField(default=0.0)
+    y2 = models.FloatField(default=0.0)
+    z2 = models.FloatField(default=0.0)
+
+
+class ALL_PROTEINS_BIG(models.Model):
+    Protein_ID = models.ForeignKey(
+        PROTEIN_HIERARCHY,
+        to_field='Protein_ID',
+        on_delete=models.CASCADE)
+    Protein_Key = models.IntegerField()
+    Key_coourence_no = models.IntegerField(default=0)
+    aacd0 = models.CharField(max_length=5, null=True)
+    position0 = models.CharField(max_length=5, null=True)
+    aacd1 = models.CharField(max_length=5, null=True)
+    position1 = models.CharField(max_length=5, null=True)
+    aacd2 = models.CharField(max_length=5, null=True)
+    position2 = models.CharField(max_length=5, null=True)
+    classT1 = models.IntegerField(default=0)
+    Theta = models.FloatField(default=0.0)
+    classL1 = models.IntegerField(default=0)
+    maxDist = models.FloatField(default=0.0)
+    x0 = models.FloatField(default=0.0)
+    y0 = models.FloatField(default=0.0)
+    z0 = models.FloatField(default=0.0)
+    x1 = models.FloatField(default=0.0)
+    y1 = models.FloatField(default=0.0)
+    z1 = models.FloatField(default=0.0)
+    x2 = models.FloatField(default=0.0)
+    y2 = models.FloatField(default=0.0)
+    z2 = models.FloatField(default=0.0)
+
+    class Meta:
+        index_together = ['Protein_ID', 'Protein_Key']
+
+
 class POSITION_INFORMATION(models.Model):
     Protein_ID = models.ForeignKey(
         PROTEIN_HIERARCHY,
