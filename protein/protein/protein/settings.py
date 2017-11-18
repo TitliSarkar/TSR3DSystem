@@ -33,19 +33,6 @@ PROTEIN_APPS = [
     'compare',
     'search'
 ]
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ProteinDB',
-        'USER': 'root',
-        'PASSWORD': '123456',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
-        'OPTIONS': {
-            'sql_mode': 'traditional',
-        }
-    }
-}
 INSTALLED_APPS = DJANGO_APPS + PROTEIN_APPS
 
 MIDDLEWARE = ['django.contrib.sessions.middleware.SessionMiddleware',
