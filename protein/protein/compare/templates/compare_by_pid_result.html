@@ -3,14 +3,16 @@
 {% block title %}Similarity values of proteinteins being compared{% endblock title %}
 
 {% block header_title %}
-
+<h2 align="center"><i class="fa fa-bar-chart"></i> Compare Results </h2>
 {% endblock header_title %}
 
 {% block body %}
-<a href="/" class="btn btn-primary">Back to Home</a>
-<h1 align="center"><i class="fa fa-bar-chart"></i>  Results of Comparison with {{ protein_compared }} :</h1>
+<h1>Results of Comparison with {{ protein_compared }} :</h1>
 <h2>Similarity Values are shown below:</h2><br>
 
+<div class="alert alert-info">
+    <i class="fa fa-info-circle"></i> Query Search time: {{ time }} seconds
+</div> <!-- alert -->
 
 {% if no_result_found %}
 <div class="row">
