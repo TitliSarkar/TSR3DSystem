@@ -1,57 +1,91 @@
-{% extends "static/atom.html" %} {% load staticfiles %}{% load i18n %} {% block title %}Welcome to TSR Protein Website{% endblock title %} {% block script %}
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.downCount/1.0.0/jquery.downCount.min.js"></script>
+{% extends "static/atom.html" %}
+{% load staticfiles %}
+{% load i18n %}
+{% block title %}Welcome to TSR Protein Website{% endblock title %}
+{% block style_extra %}
+<style>
+body {
+    color: #1e1e1e;
+    background: url('{% static 'images/pattern.png' %}');
+    background-color: #99CDFF;
+    text-shadow: 0 2px 0 rgba(0,0,0,.15);
+}
+</style>
+{% endblock style_extra %}
+{% block script %}
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script>
 <script src="{% static 'js/jquery.singlePageNav.min.js' %}"></script>
 <script src="{% static 'js/custom.js' %}"></script>
-{% endblock script %} {% block content %} {% block body %}
+{% endblock script %}
+{% block content %}
+{% block body %}
 
 <!-- start preloader -->
 <div class="preloader" id="preloader">
   <img src="{% static 'images/Preloader.gif' %}" alt="Preloader" />
 </div> <!-- preloader -->
 
-<div class="jumbotron">
-  <div class="container">
+<div class="container">
+    <br/><br/>
+    <h1 class="centered wow pulse">Triangular Spatial Relation based Protein 3D System</h1>
     <div class="row">
-      <div class="col-md-4"></div>
-      <div class="col-md-4">
-        <div class="wow zoomIn" data-wow-duration="1s" data-wow-offset="100">
-            <div class="wow tada" data-wow-delay="1s" data-wow-duration="1s">
-                <div class="wow rubberBand" data-wow-delay="2000ms" data-wow-duration="1s">
-                    <div class="centered wow pulse" data-wow-delay="300ms" data-wow-iteration="infinite" data-wow-duration="2s">
-                        <img src="{% static 'images/logo.png' %}" class="img-fluid centered" , style="width:75%">
-                    </div> <!--centered-->
-                </div> <!--rubberBand-->
-            </div> <!--wow tada-->
-        </div> <!--wow zoomIn-->
-      </div> <!--col-md-4-->
-      <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <img src="{% static 'images/protein.gif' %}" class="img-fluid centered">
+        </div> <!--col-md-4-->
+        <div class="col-md-4"></div>
     </div> <!-- row -->
+    <br/><br/>
 
-    <h1 class="centered wow pulse">TSR Protein Database</h1>
+    <h2 class="centered wow pulse">'Compare' Type Queries: </h2>
+    <br/>
     <div class="row">
-      <div class="col-md-3 wow fadeInLeft" data-wow-delay="0.3s">
-        <a href={% url 'compare_by_pid_home' %} data-scroll target="_blank" class="btn btn-primary btn-block" role="button">
-          <i class="fa fa-balance-scale"></i> Protein ID
-        </a>
-      </div> <!-- col-md-3 -->
-      <div class="col-md-3 wow bounceInDown" data-wow-delay="0.5s">
-        <a href={% url 'compare_by_hl_home' %} data-scroll target="_blank" class="btn btn-primary btn-block" role="button">
-          <i class='fa fa-balance-scale'></i> Hierarchy Level
-        </a>
-      </div> <!-- col-md-3 -->
-      <div class="col-md-3 wow bounceInUp" data-wow-delay="0.5s">
-        <a href={% url 'search_by_pid_home' %} data-scroll target="_blank" class="btn btn-primary btn-block" role="button">
-          <i class='fa fa-search'></i> Proteins ID
-        </a>
-      </div> <!-- col-md-3 -->
-      <div class="col-md-3 wow fadeInRight" data-wow-delay="0.3s">
-        <a href={% url 'search_by_pid_seq_home' %} data-scroll target="_blank" class="btn btn-primary btn-block" role="button">
-          <i class='fa fa-search'></i> Protein ID and Sequence
-        </a>
-      </div> <!-- col-md-3 -->
+        <div class="col-md-2"></div>
+        <div class="col-md-4 wow fadeInLeft" data-wow-delay="0.3s">
+            <a href={% url 'compare_by_pid_home' %}
+                data-scroll target="_blank"
+                class="btn btn-default btn-block btn-lg raised"
+                role="button">
+                <i class="fa fa-balance-scale"></i> Protein ID
+            </a>
+        </div> <!-- col-md-3 -->
+        <div class="col-md-4 wow bounceInDown" data-wow-delay="0.5s">
+            <a href={% url 'compare_by_hl_home' %}
+                data-scroll target="_blank"
+                class="btn btn-default btn-block btn-lg raised"
+                role="button">
+                <i class='fa fa-balance-scale'></i> Hierarchy Level
+            </a>
+        </div> <!-- col-md-3 -->
+        <div class="col-md-2"></div>
+    </div> <!---row-->
+
+    <br/><br/>
+
+    <h2 class="centered wow pulse">'Search' Type Queries: </h2>
+    <br/>
+
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-4 wow bounceInUp" data-wow-delay="0.5s">
+            <a href={% url 'search_by_pid_home' %}
+                data-scroll target="_blank"
+                class="btn btn-default btn-block btn-lg raised"
+                role="button">
+                <i class='fa fa-search'></i> Proteins ID
+            </a>
+        </div> <!-- col-md-4 -->
+        <div class="col-md-4 wow fadeInRight" data-wow-delay="0.3s">
+            <a href={% url 'search_by_pid_seq_home' %}
+                data-scroll target="_blank"
+                class="btn btn-default btn-block btn-lg raised"
+                role="button">
+                <i class='fa fa-search'></i> Protein ID and Sequence
+            </a>
+        </div> <!-- col-md-4 -->
+        <div class="col-md-2"></div>
     </div> <!-- row -->
-  </div> <!-- container -->
-</div> <!-- jumbotron -->
+</div> <!-- container -->
 <!-- end home -->
-{% endblock body %} {% endblock content %}
+{% endblock body %}
+{% endblock content %}

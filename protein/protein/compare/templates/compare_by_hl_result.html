@@ -11,6 +11,10 @@
 {% block body %}
 <h1 align="center">Results of Comparison with {{ protein_compared }} :</h1>
 
+<div class="alert alert-info">
+    <i class="fa fa-info-circle"></i> Query Search time: {{ time }} seconds
+</div> <!-- alert -->
+
 {% if no_result_found %}
 <div class="row">
     <div class="alert alert-info">

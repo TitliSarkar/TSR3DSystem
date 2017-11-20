@@ -9,6 +9,8 @@ from compare.models import ALL_PROTEINS
 from compare.models import POSITION_INFORMATION
 from compare.models import PROTEIN_HIERARCHY
 
+import time
+
 
 class SearchByProteinID(ListView):
     model = PROTEIN_HIERARCHY
@@ -21,6 +23,7 @@ def search_by_protein_id(request):
     Output: Commom keys, by clicking on each keys, displays
     list of all protein_ids having it and other details too
     """
+    start = time.clock()
     context = {}
     protein_keys_list = []
     protein_keys_dict = {}
@@ -47,6 +50,8 @@ def search_by_protein_id(request):
                 .order_by('Protein_ID_id', 'Key_coourence_no'))
         protein_keys_dict[str(key)] = qs_desc_list
 
+    end = time.clock()
+    context['time'] = round(end - start, 4)
     context['protein_keys_list'] = protein_keys_list
     context['protein_keys_dict'] = protein_keys_dict
 
@@ -71,6 +76,7 @@ def search_by_protein_id_seq_step1(request):
 
 
 def search_by_protein_id_seq_step2(request):
+    start = time.clock()
     context = {}
     if request.method == 'POST':
         protein_key_list = []
@@ -104,4 +110,6 @@ def search_by_protein_id_seq_step2(request):
         context['protein_keys_list'] = protein_key_list
         context['protein_keys_dict'] = protein_keys_dict
 
+    end = time.clock()
+    context['time'] = round(end - start, 4)
     return render(request, 'search_by_pid_seq_search_result.html', context)

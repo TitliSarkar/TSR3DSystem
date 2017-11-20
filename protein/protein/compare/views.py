@@ -13,6 +13,8 @@ from compare.models import HOMOLOGYSUPERFAMILY_DESCRIPTION
 
 from compare.helper import get_hierarchy_list
 
+import time
+
 
 class CompareByProteinID(ListView):
     model = PROTEIN_HIERARCHY
@@ -20,6 +22,7 @@ class CompareByProteinID(ListView):
 
 
 def compare_by_protein_id_result(request):
+    start = time.clock()
     context = {}
 
     if request.method == "GET":
@@ -70,6 +73,9 @@ def compare_by_protein_id_result(request):
             })
 
         context['protein_details_list'] = row_val
+
+    end = time.clock()
+    context['time'] = round(end - start, 4)
     return render(request, 'compare_by_pid_result.html', context)
 
 
@@ -79,6 +85,7 @@ class CompareByHierarchy(ListView):
 
 
 def compare_by_hierarchy_result(request):
+    start = time.clock()
     context = {}
 
     if request.method == "GET":
@@ -154,4 +161,7 @@ def compare_by_hierarchy_result(request):
 
         context['protein_compared'] = protein_id
         context['protein_details_list'] = row_val
+
+    end = time.clock()
+    context['time'] = round(end - start, 4)
     return render(request, 'compare_by_hl_result.html', context)
