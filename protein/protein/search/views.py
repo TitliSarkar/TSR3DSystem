@@ -5,7 +5,8 @@ from django.db.models.aggregates import Count
 from django.db.models import Q
 from django.views.generic.list import ListView
 
-from compare.models import ALL_PROTEINS
+from compare.models import ALL_PROTEINS, ALL_PROTEINS_BIG
+from compare.models import ALL_PROTEINS_BIG_UNINDEXED
 from compare.models import POSITION_INFORMATION
 from compare.models import PROTEIN_HIERARCHY
 
@@ -28,9 +29,22 @@ def search_by_protein_id(request):
     protein_keys_list = []
     protein_keys_dict = {}
     user_protein_list = request.POST.getlist("list3")
+    print(user_protein_list)
+    if user_protein_list == "":
+        user_protein_list = PROTEIN_HIERARCHY.objects\
+            .all().values('Protein_ID')
     context['protein_list'] = user_protein_list
 
-    protein_key_queryset = ALL_PROTEINS.objects.filter(
+    if "small_table" in request.POST:
+        all_proteins_table = ALL_PROTEINS
+    elif "big_indexed_table" in request.POST:
+        all_proteins_table = ALL_PROTEINS_BIG
+    elif "big_unindexed_table" in request.POST:
+        all_proteins_table = ALL_PROTEINS_BIG_UNINDEXED
+    else:
+        all_proteins_table = ALL_PROTEINS
+
+    protein_key_queryset = all_proteins_table.objects.filter(
         Protein_ID_id__in=user_protein_list)\
         .distinct()\
         .values('Protein_Key')\
@@ -40,11 +54,10 @@ def search_by_protein_id(request):
 
     for query in protein_key_queryset:
         protein_keys_list.append(query.get('Protein_Key'))
-
     for key in protein_keys_list:
         qs_desc_list = []
         for prot in user_protein_list:
-            qs_desc_list.append(ALL_PROTEINS.objects.filter(
+            qs_desc_list.append(all_proteins_table.objects.filter(
                 Q(Protein_Key=str(key))
                 & Q(Protein_ID_id=str(prot)))
                 .order_by('Protein_ID_id', 'Key_coourence_no'))
@@ -92,7 +105,16 @@ def search_by_protein_id_seq_step2(request):
         for dict in pos_info_queryset:
             pid_list.append(dict.get('Protein_ID'))
 
-        all_proteins_queryset = ALL_PROTEINS.objects.filter(
+        if "small_table" in request.POST:
+            all_proteins_table = ALL_PROTEINS
+        elif "big_indexed_table" in request.POST:
+            all_proteins_table = ALL_PROTEINS_BIG
+        elif "big_unindexed_table" in request.POST:
+            all_proteins_table = ALL_PROTEINS_BIG_UNINDEXED
+        else:
+            all_proteins_table = ALL_PROTEINS
+
+        all_proteins_queryset = all_proteins_table.objects.filter(
             Protein_ID_id__in=pid_list)\
             .distinct()\
             .values('Protein_Key')\
@@ -103,7 +125,7 @@ def search_by_protein_id_seq_step2(request):
             protein_key_list.append(dict.get('Protein_Key'))
 
         for key in protein_key_list:
-            protein_keys_dict[str(key)] = ALL_PROTEINS.objects.filter(
+            protein_keys_dict[str(key)] = all_proteins_table.objects.filter(
                 Q(Protein_Key=str(key)))\
                 .order_by('Protein_ID_id', 'Key_coourence_no')
 

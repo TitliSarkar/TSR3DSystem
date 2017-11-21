@@ -29,7 +29,7 @@ function list4_1Changed()
 <form name="displayform" method="POST" action="{% url 'search_by_pid_seq_search_result' %}">{% csrf_token %}
     <h2 align="center">Select three sequences which you want to search</h2>
     <div class="centered">
-        <select id="list4_1" name="list4_1" size=5 style="min-width: 200px" 
+        <select id="list4_1" name="list4_1" size=10 style="min-width: 600px" 
             multiple="multiple" onclick='list4_1Changed(this.value);'>
             <option  disabled selected>Select</option>
             {% for seq_dict in seq_list %}
@@ -40,11 +40,22 @@ function list4_1Changed()
             {% endfor %}
             {% endfor %}
         </select>
-        <br><br><br><br>
+        <br><br>
         <p id="demo4"></p>
-        <button type="submit" class="btn btn-primary">
-            <i class="fa fa-search"></i> Search
-        </button>
+        <div class="row">
+            <button type="submit" class="btn btn-primary btn-lg"
+                name="small_table">
+                <i class="fa fa-search"></i> Small Protein Database
+            </button>
+            <button type="submit" class="btn btn-primary btn-lg"
+                name="big_indexed_table">
+                <i class="fa fa-search"></i> Big Indexed Protein Database
+            </button>
+            <button type="submit" class="btn btn-primary btn-lg"
+                name="big_unindexed_table">
+                <i class="fa fa-search"></i> Big Not Indexed Protein Database
+            </button>
+        </div><!--row-->
     </div><!--centered-->
 </form>
 {% endblock %}

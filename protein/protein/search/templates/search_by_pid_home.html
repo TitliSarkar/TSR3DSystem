@@ -28,7 +28,7 @@ function list3Changed()
 <form name="displayform" method="POST" action="{% url 'search_by_pid_result' %}">{% csrf_token %}
     <h2>Select PDB IDs you want to search for common keys: </h2>
     <div class="centered">
-        <select id="list3" name="list3" size=5 style="min-width: 200px"
+        <select id="list3" name="list3" size=10 style="min-width: 600px"
             multiple="multiple" onclick='list3Changed(this.value);'>
             {% for protein in object_list %}
             <option value="{{ protein.Protein_ID }}" >{{ protein.Protein_ID }}</option>
@@ -38,9 +38,20 @@ function list3Changed()
 	    </select>
         <br><br><br><br>
         <p id="demo3"></p>
-        <button type="submit" class="btn btn-primary">
-            <i class="fa fa-search"></i> Search
-        </button>
+        <div class="row">
+            <button type="submit" class="btn btn-primary btn-lg"
+                name="small_table">
+                <i class="fa fa-search"></i> Small Protein Database
+            </button>
+            <button type="submit" class="btn btn-primary btn-lg"
+                name="big_indexed_table">
+                <i class="fa fa-search"></i> Big Indexed Protein Database
+            </button>
+            <button type="submit" class="btn btn-primary btn-lg"
+                name="big_unindexed_table">
+                <i class="fa fa-search"></i> Big Not Indexed Protein Database
+            </button>
+        </div><!--row-->
     </div><!--centered-->
 </form>
 {% endblock %}

@@ -29,16 +29,17 @@ function list4Changed()
 <form name="displayform" method="POST" action="{% url 'search_by_pid_seq_search' %}">{% csrf_token %}
     <h2>Select PDB IDs you want to search for common keys:</h2>
     <div class="centered">
-        <select id="list4" name="list4" size=5 style="min-width: 200px"  onclick='list4Changed(this.value);'>
+        <select id="list4" name="list4" size=10 style="min-width: 600px"
+            onclick='list4Changed(this.value);'>
             {% for protein in object_list %}
             <option value="{{ protein.Protein_ID }}" >{{ protein.Protein_ID }}</option>
             {% empty %}
             <option value="">NO VALUES YET</option>
             {% endfor %}
         </select>
-        <br><br><br><br>
+        <br><br>
         <p id="demo4"></p>
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" class="btn btn-primary btn-lg">
             <i class="fa fa-search"></i> Search
         </button>
     </div><!--centered-->
