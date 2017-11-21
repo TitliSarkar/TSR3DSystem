@@ -29,10 +29,17 @@ def search_by_protein_id(request):
     protein_keys_list = []
     protein_keys_dict = {}
     user_protein_list = request.POST.getlist("list3")
-    print(user_protein_list)
-    if user_protein_list == "":
-        user_protein_list = PROTEIN_HIERARCHY.objects\
+
+    if not user_protein_list and "small_table" in request.POST:
+        user_protein_list = ['1a06', '1cdk', '1muo', '2src']
+    else:
+        protein_list = PROTEIN_HIERARCHY.objects\
             .all().values('Protein_ID')
+        user_protein_list = []
+        for protein in protein_list:
+            for key, value in protein.iteritems():
+                user_protein_list.append(value)
+
     context['protein_list'] = user_protein_list
 
     if "small_table" in request.POST:
@@ -63,6 +70,7 @@ def search_by_protein_id(request):
                 .order_by('Protein_ID_id', 'Key_coourence_no'))
         protein_keys_dict[str(key)] = qs_desc_list
 
+    print(protein_keys_dict)
     end = time.clock()
     context['time'] = round(end - start, 4)
     context['protein_keys_list'] = protein_keys_list

@@ -31,10 +31,17 @@ def compare_by_protein_id_result(request):
     if request.method == "POST":
         row_val = []
         protein_compared = request.POST["list1"]
-        protein_list = request.POST.getlist("list2")
+        user_protein_list = request.POST.getlist("list2")
+        if not user_protein_list:
+            protein_list = PROTEIN_HIERARCHY.objects\
+                .all().values('Protein_ID')
+            user_protein_list = []
+            for protein in protein_list:
+                for key, value in protein.iteritems():
+                    user_protein_list.append(value)
         context['protein_compared'] = protein_compared
 
-        for protein in protein_list:
+        for protein in user_protein_list:
             similarity_info_queryset = SIMILARITY_INFORMATION.objects.filter(
                 Protein_ID1_id=protein_compared,
                 Protein_ID2_id=protein)
