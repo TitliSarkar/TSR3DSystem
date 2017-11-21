@@ -70,7 +70,6 @@ def search_by_protein_id(request):
                 .order_by('Protein_ID_id', 'Key_coourence_no'))
         protein_keys_dict[str(key)] = qs_desc_list
 
-    print(protein_keys_dict)
     end = time.clock()
     context['time'] = round(end - start, 4)
     context['protein_keys_list'] = protein_keys_list
