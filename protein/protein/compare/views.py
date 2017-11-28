@@ -2,6 +2,7 @@
 # django imports
 from django.shortcuts import render
 from django.views.generic.list import ListView
+from operator import itemgetter
 
 # app import
 from compare.models import SIMILARITY_INFORMATION
@@ -72,7 +73,8 @@ def compare_by_protein_id_result(request):
                 'homsup_desc': homology_result.DescriptionOfHomologySuperfamily
             })
 
-        context['protein_details_list'] = row_val
+        context['protein_details_list'] = sorted(
+            row_val, key=itemgetter('similarity'), reverse=True)
 
     end = time.clock()
     context['time'] = round(end - start, 4)
@@ -160,7 +162,8 @@ def compare_by_hierarchy_result(request):
             })
 
         context['protein_compared'] = protein_id
-        context['protein_details_list'] = row_val
+        context['protein_details_list'] = sorted(
+            row_val, key=itemgetter('similarity'), reverse=True)
 
     end = time.clock()
     context['time'] = round(end - start, 4)
