@@ -11,6 +11,7 @@ from compare.models import POSITION_INFORMATION
 from compare.models import PROTEIN_HIERARCHY
 
 import time
+from collections import Counter
 
 
 class SearchByProteinID(ListView):
@@ -26,13 +27,12 @@ def search_by_protein_id(request):
     """
     start = time.clock()
     context = {}
-    protein_keys_list = []
-    protein_keys_dict = {}
+    protein_key_list = []
     user_protein_list = request.POST.getlist("list3")
-    print(user_protein_list)
-    if user_protein_list == "":
-        user_protein_list = PROTEIN_HIERARCHY.objects\
-            .all().values('Protein_ID')
+
+    if not user_protein_list and "small_table" in request.POST:
+        user_protein_list = ['1a06', '1cdk', '1muo', '2src']
+
     context['protein_list'] = user_protein_list
 
     if "small_table" in request.POST:
@@ -53,20 +53,30 @@ def search_by_protein_id(request):
         .order_by('Protein_Key')
 
     for query in protein_key_queryset:
-        protein_keys_list.append(query.get('Protein_Key'))
-    for key in protein_keys_list:
-        qs_desc_list = []
-        for prot in user_protein_list:
-            qs_desc_list.append(all_proteins_table.objects.filter(
-                Q(Protein_Key=str(key))
-                & Q(Protein_ID_id=str(prot)))
-                .order_by('Protein_ID_id', 'Key_coourence_no'))
-        protein_keys_dict[str(key)] = qs_desc_list
+        protein_key_list.append(query.get('Protein_Key'))
+
+    sub_query = all_proteins_table.objects.filter(
+        Protein_Key__in=protein_key_list)\
+        .distinct()\
+        .values_list('Protein_ID', 'Protein_Key')
+
+    sub_query_list = [entry for entry in sub_query]
+
+    d = {}
+    cnt = Counter(elem[0] for elem in sub_query_list)
+    for key, value in cnt.items():
+        d[key] = value
+
+    pro_list = filter(lambda x: x[1] >= len(protein_key_list), d.items())
+    proteins = []
+    for i in range(len(pro_list)):
+        proteins.append(pro_list[i][0])
 
     end = time.clock()
     context['time'] = round(end - start, 4)
-    context['protein_keys_list'] = protein_keys_list
-    context['protein_keys_dict'] = protein_keys_dict
+    context['common_keys'] = protein_key_list
+    context['proteins'] = proteins
+    context['protein_key_list'] = protein_key_list
 
     return render(request, 'search_by_pid_result.html', context)
 
@@ -84,6 +94,7 @@ def search_by_protein_id_seq_step1(request):
             Q(Protein_ID=str(pid)))\
             .values('Seq_ID')
         context['seq_list'] = seq_id_queryset
+        context['pid'] = pid
 
     return render(request, 'search_by_pid_seq_search.html', context)
 
@@ -94,8 +105,8 @@ def search_by_protein_id_seq_step2(request):
     if request.method == 'POST':
         protein_key_list = []
         pid_list = []
-        protein_keys_dict = {}
         seq_list = request.POST.getlist("list4_1")
+        context['pid'] = request.POST.get('pid', '1a06')
         context['seq_list'] = seq_list
 
         pos_info_queryset = POSITION_INFORMATION.objects.filter(
@@ -122,16 +133,28 @@ def search_by_protein_id_seq_step2(request):
             .distinct()
 
         for dict in all_proteins_queryset:
-            protein_key_list.append(dict.get('Protein_Key'))
+            protein_key_list.append(int(dict.get('Protein_Key')))
 
-        for key in protein_key_list:
-            protein_keys_dict[str(key)] = all_proteins_table.objects.filter(
-                Q(Protein_Key=str(key)))\
-                .order_by('Protein_ID_id', 'Key_coourence_no')
+        sub_query = all_proteins_table.objects.filter(
+            Protein_Key__in=protein_key_list)\
+            .distinct()\
+            .values_list('Protein_ID', 'Protein_Key')
 
+        sub_query_list = [entry for entry in sub_query]
+
+        d = {}
+        cnt = Counter(elem[0] for elem in sub_query_list)
+        for key, value in cnt.items():
+            d[key] = value
+
+        pro_list = filter(lambda x: x[1] >= len(protein_key_list), d.items())
+        proteins = []
+        for i in range(len(pro_list)):
+            proteins.append(pro_list[i][0])
+
+        context['common_keys'] = protein_key_list
+        context['proteins'] = proteins
         context['protein_keys_list'] = protein_key_list
-        context['protein_keys_dict'] = protein_keys_dict
-
     end = time.clock()
     context['time'] = round(end - start, 4)
     return render(request, 'search_by_pid_seq_search_result.html', context)
