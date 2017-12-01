@@ -1,19 +1,59 @@
 {% extends 'static/base.html' %}
 {% load i18n %} {% load staticfiles %}
-{% block title %}Similarity values of proteinteins being compared{% endblock title %}
+{% block title %}Similarity values of proteins being compared{% endblock title %}
 
 {% block header_title %}
 <h2 class="wow fadeindown">
     <i class="fa fa-bar-chart"></i> Comparison results
 </h2>
 {% endblock header_title %}
+{% block style_extra %}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
+{% endblock style_extra %}
+
+{% block script %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript">
+var proteins = [
+{% for protein in protein_details_list %}
+[
+    "{{ protein.ProtId }}", "{{ protein.similarity }}",
+    "{{ protein.class}}", "{{ protein.class_desc }}",
+    "{{ protein.archi }}", "{{ protein.archi_desc }}",
+    "{{ protein.topfold }}", "{{ protein.topfold_desc }}",
+    "{{ protein.homsup }}", "{{ protein.homsup_desc }}"
+],
+{% endfor %}];
+console.log(proteins);
+$(document).ready(function(){
+    $('#similarityTable').dataTable({
+        data: proteins,
+        columns: [
+            {title: "Protein ID"},
+            {title: "Similarity Value"},
+            {title: "Class"},
+            {title: "Class Description"},
+            {title: "Architecture"},
+            {title: "Architecture Description"},
+            {title: "Topology Fold"},
+            {title: "Topology Fold Description"},
+            {title: "Homology Superfamily"},
+            {title: "Homology Superfamily Description"},
+        ]
+    });
+});
+</script>
+{% endblock script %}
 
 {% block body %}
-<h1 align="center">Results of Comparison with {{ protein_compared }} :</h1>
-
 <div class="alert alert-info">
     <i class="fa fa-info-circle"></i> Query Search time: {{ time }} seconds
 </div> <!-- alert -->
+
+<h2>Results of Comparison with {{ protein_compared }}</h2>
+<h4>Similarity Values are shown below:</h4>
 
 {% if no_result_found %}
 <div class="row">
@@ -21,42 +61,11 @@
         <i class="fa fa-info-circle"></i> No matching results found in the Database
     </div><!--alert alert-success-->
 </div><!--row-->
-
 {% else %}
-<div clas="table-responsive">
-    
-	<table class="table table-bordered table-striped table-hover">
-        <thead>
-            <tr>
-                <th>protein ID</th>
-                <th>Similarity Value</th>
-                <th>Class</th>
-                <th>Class Description</th>
-                <th>Architecture</th>
-                <th>Architecture Description</th>
-                <th>Topology Fold</th>
-                <th>Topology Fold Description</th>
-                <th>Homology Superfamily</th>
-                <th>Homology Superfamily Description</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for protein in protein_details_list %}
-            <tr>
-                <td>{{ protein.ProtId }}</td>
-                <td>{{ protein.similarity }}</td>
-                <td>{{ protein.class}}</td>
-                <td>{{ protein.class_desc }}</td>
-                <td>{{ protein.archi }}</td>
-                <td>{{ protein.archi_desc }}</td>
-                <td>{{ protein.topfold }}</td>
-                <td>{{ protein.topfold_desc }}</td>
-                <td>{{ protein.homsup }}</td>
-                <td>{{ protein.homsup_desc }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
+<div clas="table-responsive"> 
+    <table id="similarityTable" class="table table-bordered table-striped table-hover">
     </table>
 </div> <!--table-responsive-->
 {% endif %}
+<br/><br/>
 {% endblock body %}
