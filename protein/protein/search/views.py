@@ -72,11 +72,11 @@ def search_by_protein_id(request):
     for i in range(len(pro_list)):
         proteins.append(pro_list[i][0])
 
-    end = time.clock()
-    context['time'] = round(end - start, 4)
     context['common_keys'] = protein_key_list
     context['proteins'] = proteins
     context['protein_key_list'] = protein_key_list
+    end = time.clock()
+    context['time'] = round(end - start, 4)
 
     return render(request, 'search_by_pid_result.html', context)
 
