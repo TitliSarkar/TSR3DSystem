@@ -29,40 +29,51 @@ function list2Changed()
 {% endblock script %}
 
 {% block body %}
+<br/><br/>
 <form name="displayform" method="POST" action="{% url 'compare_by_pid_result' %}">
     {% csrf_token %}
-    <h2>Select PDB ID you want to compare:</h2>
-    <div class="centered">
-        <select id="list1" name="list1"
-            onclick='list1Changed(this.value);'
-            style="margin:20px;min-width: 200px">
-            {% for protein in object_list %}
-            <option value="{{ protein.Protein_ID }}" >{{ protein.Protein_ID }}</option>
-            {% empty %}
-            <option value="">NO VALUES YET</option>
-            {% endfor %}
-        </select>
-        <br>
-        <p id="demo"></p>
-        <br>
-    </div><!--centered-->
-    <h2>Select PDB IDs you want to compare:</h2>
-    <div class="centered">
-        <select id="list2" name="list2" size=5
-            style="min-width: 200px" multiple="multiple"
-            onclick='list2Changed(this.value);'>
-            {% for protein in object_list %}
-            <option value="{{ protein.Protein_ID }}" >{{ protein.Protein_ID }}</option>
-            {% empty %}
-            <option value="">NO VALUES YET</option>
-            {% endfor %}
-        </select>
-        <br><br><br><br>
-        <p id="demo1"></p>
-        <button type="submit" class="btn btn-primary">
-            <i class="fa fa-balance-scale"></i> Compare Proteins
-        </button>
-    </div><!--centered-->
-	</form>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="centered">
+                <h4>Select the PDB ID you want to compare:</h4>
+            </div><!--centered-->
+            <select id="list1" name="list1"
+                onclick='list1Changed(this.value);'
+                style="margin:20px;min-width:450px">
+                {% for protein in object_list %}
+                <option value="{{ protein.Protein_ID }}" >{{ protein.Protein_ID }}</option>
+                {% empty %}
+                <option value="">NO VALUES YET</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            <p id="demo"></p>
+        </div><!--col-md-6-->
+        <div class="col-md-6">
+            <div class="centered">
+                <h4>Select PDB IDs you want to compare with:</h4>
+            </div><!--centered-->
+            <select id="list2" name="list2" size=10
+                style="min-width:500px" multiple="multiple"
+                onclick='list2Changed(this.value);'>
+                {% for protein in object_list %}
+                <option value="{{ protein.Protein_ID }}" >{{ protein.Protein_ID }}</option>
+                {% empty %}
+                <option value="">Could not fetch any values from database</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            <p id="demo1"></p>
+        </div><!--col-md-6-->
+    </div><!--row-->
+    <br><br><br><br>
+    <div class="row">
+        <div class="centered">
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-balance-scale"></i> Compare Proteins
+            </button>
+        </div><!--centered-->
+    </div><!--row-->
+</form>
 
 {% endblock body %}

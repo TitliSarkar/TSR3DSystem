@@ -25,21 +25,25 @@ function list3Changed()
 {% endblock script %}
 
 {% block body %}
+<br/><br/>
 <form name="displayform" method="POST" action="{% url 'search_by_pid_result' %}">{% csrf_token %}
-    <h2>Select PDB IDs you want to search for common keys: </h2>
     <div class="centered">
-        <select id="list3" name="list3" size=10 style="min-width: 600px"
+        <h4>Select PDB IDs you want to search for common keys: </h4>
+    </div><!--centered-->
+    <div class="centered">
+        <select id="list3" name="list3" size=10 style="min-width: 500px"
             multiple="multiple" onclick='list3Changed(this.value);'>
             {% for protein in object_list %}
             <option value="{{ protein.Protein_ID }}" >{{ protein.Protein_ID }}</option>
             {% empty %}
-            <option value="">NO VALUES YET</option>
+            <option value="">Failed to fetch values from database</option>
             {% endfor %}
 	    </select>
-        <br><br><br><br>
+        <br/><br/>
         <p id="demo3"></p>
+        <br/><br/>
         <div class="row">
-            <button type="submit" class="btn btn-primary btn-lg"
+            <button type="submit" class="btn btn-primary"
                 name="big_indexed_table">
                 <i class="fa fa-search"></i> Search
             </button>
