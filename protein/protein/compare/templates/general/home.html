@@ -27,7 +27,7 @@ body {
 
 <div class="container">
     <br/><br/>
-    <h1 class="centered wow pulse">Triangular Spatial Relation based Protein 3D System</h1>
+    <h1 class="centered">Triangular Spatial Relation based Protein 3D System</h1>
     <div class="row">
         <div class="col-md-4"></div>
         <div class="col-md-4">
@@ -37,11 +37,11 @@ body {
     </div> <!-- row -->
     <br/><br/>
 
-    <h2 class="centered wow pulse">'Compare' Type Queries: </h2>
+    <h2 class="centered">'Compare' Type Queries: </h2>
     <br/>
     <div class="row">
         <div class="col-md-2"></div>
-        <div class="col-md-4 wow fadeInLeft" data-wow-delay="0.3s">
+        <div class="col-md-4">
             <a href={% url 'compare_by_pid_home' %}
                 data-scroll target="_blank"
                 class="btn btn-default btn-block btn-lg raised"
@@ -49,7 +49,7 @@ body {
                 <i class="fa fa-balance-scale"></i> Protein ID
             </a>
         </div> <!-- col-md-3 -->
-        <div class="col-md-4 wow bounceInDown" data-wow-delay="0.5s">
+        <div class="col-md-4">
             <a href={% url 'compare_by_hl_home' %}
                 data-scroll target="_blank"
                 class="btn btn-default btn-block btn-lg raised"
@@ -62,12 +62,12 @@ body {
 
     <br/><br/>
 
-    <h2 class="centered wow pulse">'Search' Type Queries: </h2>
+    <h2 class="centered">'Search' Type Queries: </h2>
     <br/>
 
     <div class="row">
         <div class="col-md-2"></div>
-        <div class="col-md-4 wow bounceInUp" data-wow-delay="0.5s">
+        <div class="col-md-4">
             <a href={% url 'search_by_pid_home' %}
                 data-scroll target="_blank"
                 class="btn btn-default btn-block btn-lg raised"
@@ -75,7 +75,7 @@ body {
                 <i class='fa fa-search'></i> Proteins ID
             </a>
         </div> <!-- col-md-4 -->
-        <div class="col-md-4 wow fadeInRight" data-wow-delay="0.3s">
+        <div class="col-md-4">
             <a href={% url 'search_by_pid_seq_home' %}
                 data-scroll target="_blank"
                 class="btn btn-default btn-block btn-lg raised"
@@ -86,6 +86,10 @@ body {
         <div class="col-md-2"></div>
     </div> <!-- row -->
 </div> <!-- container -->
+<div class="row">
+    <br/><br/>
+    <br/><br/>
+</div>
 <!-- end home -->
 {% endblock body %}
 {% endblock content %}
