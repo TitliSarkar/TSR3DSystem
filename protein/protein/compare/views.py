@@ -35,6 +35,9 @@ def compare_by_protein_id_result(request):
         protein_list = request.POST.getlist("list2")
         context['protein_compared'] = protein_compared
 
+        if protein_compared not in protein_list:
+            protein_list.append(protein_compared)
+
         for protein in protein_list:
             similarity_info_queryset = SIMILARITY_INFORMATION.objects.filter(
                 Protein_ID1_id=protein_compared,
