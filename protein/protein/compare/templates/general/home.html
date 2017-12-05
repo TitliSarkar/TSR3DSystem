@@ -14,8 +14,14 @@ body {
 {% endblock style_extra %}
 {% block script %}
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script>
-<script src="{% static 'js/jquery.singlePageNav.min.js' %}"></script>
 <script src="{% static 'js/custom.js' %}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();   
+    });
+</script>
 {% endblock script %}
 {% block content %}
 {% block body %}
@@ -38,12 +44,22 @@ body {
     <br/><br/>
 
     <h2 class="centered">'Compare' Type Queries: </h2>
+    <div class="centered">
+        <code>
+        Displays the similarity scores of the selected proteins/hierarchies
+        </code>
+    </div>
     <br/>
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-4">
             <a href={% url 'compare_by_pid_home' %}
-                data-scroll target="_blank"
+                target="_blank"
+                title="Compare By Protein ID"
+                data-toggle="popover"
+                data-trigger="hover"
+                data-placement="top"
+                data-content="Compares a protein with a list a proteins and returns its Jaccard's similarity value"
                 class="btn btn-default btn-block btn-lg raised"
                 role="button">
                 <i class="fa fa-balance-scale"></i> Protein ID
@@ -51,7 +67,12 @@ body {
         </div> <!-- col-md-3 -->
         <div class="col-md-4">
             <a href={% url 'compare_by_hl_home' %}
-                data-scroll target="_blank"
+                target="_blank"
+                title="Compare by Hierarchy Level"
+                data-toggle="popover"
+                data-trigger="hover"
+                data-placement="top"
+                data-content="Compares a protein with proteins belonging to specific class, architecture, toplogy fold and homology superfamily"
                 class="btn btn-default btn-block btn-lg raised"
                 role="button">
                 <i class='fa fa-balance-scale'></i> Hierarchy Level
@@ -63,6 +84,11 @@ body {
     <br/><br/>
 
     <h2 class="centered">'Search' Type Queries: </h2>
+    <div class="centered">
+        <code>
+        Displays the proteins with common sub-structure and the corresponding keys
+        </code>
+    </div>
     <br/>
 
     <div class="row">
@@ -70,6 +96,11 @@ body {
         <div class="col-md-4">
             <a href={% url 'search_by_pid_home' %}
                 data-scroll target="_blank"
+                title="Search by Protein IDs"
+                data-toggle="popover"
+                data-trigger="hover"
+                data-placement="bottom"
+                data-content="Search for the common keys among the proteins and list other proteins which contains these keys"
                 class="btn btn-default btn-block btn-lg raised"
                 role="button">
                 <i class='fa fa-search'></i> Proteins ID
@@ -78,6 +109,11 @@ body {
         <div class="col-md-4">
             <a href={% url 'search_by_pid_seq_home' %}
                 data-scroll target="_blank"
+                title="Search by Protein ID and Sequence ID"
+                data-toggle="popover"
+                data-trigger="hover"
+                data-placement="bottom"
+                data-content="Seach for the common keys among the proteins containing specific amino acid sequences"
                 class="btn btn-default btn-block btn-lg raised"
                 role="button">
                 <i class='fa fa-search'></i> Protein ID and Sequence

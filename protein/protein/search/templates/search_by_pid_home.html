@@ -29,7 +29,9 @@ function list3Changed()
 <form name="displayform" method="POST" action="{% url 'search_by_pid_result' %}">{% csrf_token %}
     <div class="centered">
         <h4>Select PDB IDs you want to search for common keys: </h4>
+        <code>Press CTRL and click to select multiple from the list</code>
     </div><!--centered-->
+    <br/><br/>
     <div class="centered">
         <select id="list3" name="list3" size=10 style="min-width: 500px"
             multiple="multiple" onclick='list3Changed(this.value);'>
@@ -44,10 +46,31 @@ function list3Changed()
         <br/><br/>
         <div class="row">
             <button type="submit" class="btn btn-primary"
+                name="small_table">
+                <i class="fa fa-search"></i> Demo Table
+            </button>
+            <button type="submit" class="btn btn-primary"
                 name="big_indexed_table">
-                <i class="fa fa-search"></i> Search
+                <i class="fa fa-search"></i> Big Indexed Table
+            </button>
+            <button type="submit" class="btn btn-primary"
+                name="big_indexed_table">
+                <i class="fa fa-search"></i> Big Not Indexed table
             </button>
         </div><!--row-->
     </div><!--centered-->
 </form>
+<br/><br/>
+<div class="row">
+    <div class="alert alert-info">
+        <i class="fa fa-info-circle"></i>
+        Demo Table contains dummy values made for the project demonstration
+        </br/>
+    </div><!--alert-->
+    <div class="alert alert-info">
+        <i class="fa fa-info-circle"></i>
+        Big Tables contains TSR keys which is selected based on two conditions: 
+        Mean Absolute Deviation &#60;= 0.01 and Document Frequency &#60; 6</br/>
+    </div><!--alert-->
+</div><!--row-->
 {% endblock %}
