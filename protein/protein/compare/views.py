@@ -35,6 +35,11 @@ def compare_by_protein_id_result(request):
         protein_list = request.POST.getlist("list2")
         context['protein_compared'] = protein_compared
 
+        if not protein_list:
+            queryset = PROTEIN_HIERARCHY.objects.all()
+            for query in queryset:
+                protein_list.append(query.Protein_ID)
+
         if protein_compared not in protein_list:
             protein_list.append(protein_compared)
 
