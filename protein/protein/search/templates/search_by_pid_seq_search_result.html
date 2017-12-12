@@ -4,7 +4,7 @@
 
 {% block header_title %}
 <h2 class="wow fadeInDown">
-    <i class="fa fa-bar-chart"></i> Search Results
+    <i class="fa fa-line-chart"></i> Local Similarity Search Results
 </h2>
 {% endblock header_title %}
 {% block style_extra %}
@@ -22,6 +22,19 @@ $(document).ready(function(){
         data: common_keys,
         columns: [
             {title: "Protein Key"},
+        ],
+        columnDefs: [
+            {
+                targets:0,
+                render: function ( data, type, row, meta ) {
+                    if(type === 'display'){
+                        var root = location.protocol + '//' + location.host;
+                        var url = root + '/search/proteinkey/' + encodeURIComponent(data);
+                        data = '<a href=' + url + ' target="_blank">' + data + '</a>';
+                    }
+                    return data;
+                }
+            }
         ]
     });
     $('#proteinTable').dataTable({

@@ -9,13 +9,26 @@
 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript">
-var common_keys = [{% for key in common_keys %} ["{{ key }}"], {% endfor %}];
-var proteins = [{% for protein in proteins %} ["{{ protein }}"], {% endfor %}];
 $(document).ready(function(){
+    var common_keys = [{% for key in common_keys %} ["{{ key }}"], {% endfor %}];
+    var proteins = [{% for protein in proteins %} ["{{ protein }}"], {% endfor %}];
     $('#commonKeysTable').dataTable({
         data: common_keys,
         columns: [
-            {title: "Protein Key"},
+            {title: 'Protein Key'},
+        ],
+        columnDefs: [
+            {
+                targets:0,
+                render: function ( data, type, row, meta ) {
+                    if(type === 'display'){
+                        var root = location.protocol + '//' + location.host;
+                        var url = root + '/search/proteinkey/' + encodeURIComponent(data);
+                        data = '<a href=' + url + ' target="_blank">' + data + '</a>';
+                    }
+                    return data;
+                }
+            }
         ]
     });
     $('#proteinTable').dataTable({
@@ -29,7 +42,7 @@ $(document).ready(function(){
 {% endblock script %}
 {% block header_title %}
 <h2 class="wow fadeInDown">
-    <i class="fa fa-bar-chart"></i> Search Results
+    <i class="fa fa-line-chart"></i> Local Similarity Search Results
 </h2>
 {% endblock header_title %}
 
