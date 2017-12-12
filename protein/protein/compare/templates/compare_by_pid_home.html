@@ -2,7 +2,7 @@
 {% block title %}Compare by Protein ID{% endblock title %}
 {% block header_title %}
 <h2 class="wow fadeInDown">
-    <i class="fa fa-balance-scale"></i> Compare by Protein ID
+    <i class="fa fa-search"></i> Global Similarity Search by Protein ID
 </h2>
 {% endblock header_title %}
 
@@ -36,20 +36,20 @@ function list2Changed()
         <div class="col-md-6">
             <div class="centered">
                 <h4>Select the PDB ID you want to compare:</h4>
+                <br><br>
+                <br><br>
+                <select id="list1" name="list1"
+                    onclick='list1Changed(this.value);'
+                    style="margin:20px">
+                    {% for protein in object_list %}
+                    <option value="{{ protein.Protein_ID }}" >{{ protein.Protein_ID }}</option>
+                    {% empty %}
+                    <option value="">NO VALUES YET</option>
+                    {% endfor %}
+                </select>
+                <br><br>
+                <p id="demo"></p>
             </div><!--centered-->
-            <br><br>
-            <br><br>
-            <select id="list1" name="list1"
-                onclick='list1Changed(this.value);'
-                style="margin:20px;min-width:450px">
-                {% for protein in object_list %}
-                <option value="{{ protein.Protein_ID }}" >{{ protein.Protein_ID }}</option>
-                {% empty %}
-                <option value="">NO VALUES YET</option>
-                {% endfor %}
-            </select>
-            <br><br>
-            <p id="demo"></p>
         </div><!--col-md-6-->
         <div class="col-md-6">
             <div class="centered">

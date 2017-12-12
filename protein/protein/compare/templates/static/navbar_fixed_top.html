@@ -17,20 +17,20 @@
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-          {% trans "Compare" %}
+          {% trans "Global Similarity Search" %}
           <span class="caret"></span>
         </a>
 
           <ul class="dropdown-menu">
             <li class="{% if request.resolver_match.url_name == 'compare_by_pid_home' %}active{% endif %}">
               <a href="{% url 'compare_by_pid_home' %}">
-                <i class='fa fa-balance-scale'></i>
+                <i class='fa fa-search'></i>
                 {% trans "Protien ID" %}
               </a>
             </li>
             <li class="{% if request.resolver_match.url_name == 'compare_by_hl_home' %}active{% endif %}">
               <a href="{% url 'compare_by_hl_home' %}">
-                <i class='fa fa-balance-scale'></i> {% trans "Heirarchy Level" %}
+                <i class='fa fa-search'></i> {% trans "Heirarchy Level" %}
               </a>
             </li>
           </ul>
@@ -40,7 +40,7 @@
 
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            {% trans "Search" %}
+            {% trans "Local Similarity Search" %}
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">

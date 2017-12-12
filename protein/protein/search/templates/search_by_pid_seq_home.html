@@ -3,7 +3,7 @@
 
 {% block header_title %}
 <h2 class="wow fadeInDown">
-    <i class="fa fa-search"></i> Search by Protein ID and Seq
+    <i class="fa fa-search"></i> Local Similarity Search by Protein ID and Sequence IDs
 </h2>
 {% endblock header_title %}
 
@@ -27,7 +27,7 @@ function seq_listChanged()
       var str="",i;
       for (i=0;i<displayform.seq_list.options.length;i++) {
           if (displayform.seq_list.options[i].selected) {
-              str = str + '<span class="badge badge1">'
+              str = str + '<span class="badge badge3">'
                   + displayform.seq_list.options[i].value + '</span> ';
           }
       }

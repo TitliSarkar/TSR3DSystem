@@ -18,9 +18,9 @@ body {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){
-    $('[data-toggle="popover"]').popover();   
-    });
+$(function() {
+    $('[data-toggle="popover"]').popover()
+});
 </script>
 {% endblock script %}
 {% block content %}
@@ -43,7 +43,7 @@ $(document).ready(function(){
     </div> <!-- row -->
     <br/><br/>
 
-    <h2 class="centered">'Compare' Type Queries: </h2>
+    <h2 class="centered">Global Similarity Search</h2>
     <div class="centered">
         <code>
         Displays the similarity scores of the selected proteins/hierarchies
@@ -55,27 +55,27 @@ $(document).ready(function(){
         <div class="col-md-4">
             <a href={% url 'compare_by_pid_home' %}
                 target="_blank"
-                title="Compare By Protein ID"
+                title="Global Similarity Search by Protein ID"
                 data-toggle="popover"
                 data-trigger="hover"
                 data-placement="top"
-                data-content="Compares a protein with a list a proteins and returns its Jaccard's similarity value"
+                data-content="Compare a protein with a list a proteins and returns Generalized Jaccard similarity values"
                 class="btn btn-default btn-block btn-lg raised"
                 role="button">
-                <i class="fa fa-balance-scale"></i> Protein ID
+                <i class="fa fa-search"></i> Protein ID
             </a>
         </div> <!-- col-md-3 -->
         <div class="col-md-4">
             <a href={% url 'compare_by_hl_home' %}
                 target="_blank"
-                title="Compare by Hierarchy Level"
+                title="Global Similarity Search by Hierarchy Level"
                 data-toggle="popover"
                 data-trigger="hover"
                 data-placement="top"
-                data-content="Compares a protein with proteins belonging to specific class, architecture, toplogy fold and homology superfamily"
+                data-content="Compare a protein with proteins belonging to specific class, architecture, toplogy fold and homology superfamily and lists Generalized Jaccard Similarity values"
                 class="btn btn-default btn-block btn-lg raised"
                 role="button">
-                <i class='fa fa-balance-scale'></i> Hierarchy Level
+                <i class='fa fa-search'></i> Hierarchy Level
             </a>
         </div> <!-- col-md-3 -->
         <div class="col-md-2"></div>
@@ -83,10 +83,10 @@ $(document).ready(function(){
 
     <br/><br/>
 
-    <h2 class="centered">'Search' Type Queries: </h2>
+    <h2 class="centered">Local Similarity Search</h2>
     <div class="centered">
         <code>
-        Displays the proteins with common sub-structure and the corresponding keys
+        Displays the proteins with common substructure and the corresponding keys
         </code>
     </div>
     <br/>
@@ -96,11 +96,11 @@ $(document).ready(function(){
         <div class="col-md-4">
             <a href={% url 'search_by_pid_home' %}
                 data-scroll target="_blank"
-                title="Search by Protein IDs"
+                title="Local Similarity Search by Protein IDs"
                 data-toggle="popover"
                 data-trigger="hover"
                 data-placement="bottom"
-                data-content="Search for the common keys among the proteins and list other proteins which contains these keys"
+                data-content="Search for the common keys among the proteins and also returns a list of proteins which contains these common keys"
                 class="btn btn-default btn-block btn-lg raised"
                 role="button">
                 <i class='fa fa-search'></i> Proteins ID
@@ -109,11 +109,11 @@ $(document).ready(function(){
         <div class="col-md-4">
             <a href={% url 'search_by_pid_seq_home' %}
                 data-scroll target="_blank"
-                title="Search by Protein ID and Sequence ID"
+                title="Local Similarity Search by Protein ID and Sequence ID"
                 data-toggle="popover"
                 data-trigger="hover"
                 data-placement="bottom"
-                data-content="Seach for the common keys among the proteins containing specific amino acid sequences"
+                data-content="Search for the common keys among the proteins containing specific amino acid sequences and also returns a list of proteins which contains these common keys"
                 class="btn btn-default btn-block btn-lg raised"
                 role="button">
                 <i class='fa fa-search'></i> Protein ID and Sequence
