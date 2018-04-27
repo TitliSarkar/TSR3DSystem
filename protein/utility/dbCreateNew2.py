@@ -106,6 +106,7 @@ def insertPROTEIN_HIERARCHY():
                                )
             except MySQLdb.Error, e:
                 print(e)
+
 def insertALL_PROTEINS_BIG():   ## saving everything in a csv file and reading from it
     with open(path+"all_proteinsS2.csv", 'r') as f:  ## inserting in smaller test table
         reader = csv.reader(f)
@@ -141,6 +142,44 @@ def insertALL_PROTEINS_BIG():   ## saving everything in a csv file and reading f
                 )
             except MySQLdb.Error, e:
                 print(e)
+
+
+def insertALL_PROTEINS_BIG_UNINDEXED():   ## saving everything in a csv file and reading from it
+    with open(path+"all_proteinsS2.csv", 'r') as f:  ## inserting in smaller test table
+        reader = csv.reader(f)
+        for row in reader:
+            Protein_ID = str(row[0])
+            Protein_Key = int(row[1])
+            Key_coourence_no = int(row[2])
+            aacd0 = row[3]
+            position0= row[4]
+            aacd1= row[5]
+            position1= row[6]
+            aacd2= row[7]
+            position2= row[8]
+            classT1= int(row[9])
+            Theta= float(row[10])
+            classL1= int(row[11])
+            maxDist= float(row[12])
+            x0= float(row[13])
+            y0= float(row[14])
+            z0= float(row[15])
+            x1= float(row[16])
+            y1= float(row[17])
+            z1= float(row[18])
+            x2= float(row[19])
+            y2= float(row[20])
+            z2= float(row[21])
+            #print (Protein_ID, Protein_Key, Key_coourence_no, aacd0, position0, aacd1, position1, aacd2, position2, classT1, Theta, classL1, maxDist, x0, y0, z0, x1, y1, z1, x2, y2, z2)
+            try:
+                cursor.execute(
+                    "INSERT INTO compare_all_proteins_big_unindexed(Protein_ID_id, Protein_Key, Key_coourence_no, aacd0, position0, aacd1, position1, aacd2, position2, classT1, Theta, classL1, maxDist, x0, y0, z0, x1, y1, z1, x2, y2, z2) "
+                    "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                    ([Protein_ID], [Protein_Key], [Key_coourence_no], [aacd0], [position0], [aacd1], [position1], [aacd2], [position2], [classT1], [Theta], [classL1], [maxDist], [x0], [y0], [z0], [x1], [y1], [z1], [x2], [y2], [z2])
+                )
+            except MySQLdb.Error, e:
+                print(e)
+
 def insertALL_PROTEINS():   ## saving everything in a csv file and reading from it
     with open(path+"all_proteinsS2.csv", 'r') as f:  ## inserting in smaller test table
         reader = csv.reader(f)
@@ -216,7 +255,8 @@ def insertSIMILARITY_INFORMATION():
 # insertTOPOLOGYFOLD_DESCRIPTION()
 # insertHOMOLOGYSUPERFAMILY_DESCRIPTION()
 # insertPROTEIN_HIERARCHY()
-insertALL_PROTEINS_BIG()
+# insertALL_PROTEINS_BIG()
+insertALL_PROTEINS_BIG_UNINDEXED()
 # insertPOSITION_INFORMATION() ######
 # insertSIMILARITY_INFORMATION()
 
