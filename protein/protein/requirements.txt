@@ -7,7 +7,7 @@ gitdb2==2.0.0
 GitPython==2.1.1
 legit==0.4.1
 MySQL-python==1.2.5
-numpy==1.13.3
+numpy==1.22.0
 packaging==16.8
 pandas==0.20.3
 pyparsing==2.1.10
